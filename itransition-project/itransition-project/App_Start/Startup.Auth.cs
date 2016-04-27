@@ -63,6 +63,12 @@ namespace itransition_project
             //    ClientId = "",
             //    ClientSecret = ""
             //});
+
+            app.UseVkontakteAuthentication(
+                appId: "5437851",
+                appSecret: "IwKyBbknT0ca7YQB7u4E",
+                scope: "offline"
+                );
         }
     }
 }
