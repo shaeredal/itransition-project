@@ -36,6 +36,11 @@ namespace itransition_project.Models
 
     }
 
+    public class Page
+    {
+
+    }
+
     public class AgeRating
     {
 

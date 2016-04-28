@@ -209,10 +209,6 @@
     <Compile Include="Migrations\201604271709309_InitialCreate.Designer.cs">
       <DependentUpon>201604271709309_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201604281450564_AppUser_AvatarAdded.cs" />
-    <Compile Include="Migrations\201604281450564_AppUser_AvatarAdded.Designer.cs">
-      <DependentUpon>201604281450564_AppUser_AvatarAdded.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -1079,9 +1075,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201604271709309_InitialCreate.resx">
       <DependentUpon>201604271709309_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604281450564_AppUser_AvatarAdded.resx">
-      <DependentUpon>201604281450564_AppUser_AvatarAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
