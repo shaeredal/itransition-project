@@ -16,6 +16,10 @@ namespace itransition_project.Models
             // Add custom user claims here
             return userIdentity;
         }
+        public virtual Profile Profile { get; set; }
+        public string Language { get; set; }
+        public string Theme { get; set; }
+        public string Name { get; set;}
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
