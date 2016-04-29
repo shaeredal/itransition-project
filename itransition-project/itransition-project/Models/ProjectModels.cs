@@ -37,7 +37,7 @@ namespace itransition_project.Models
     public class Rating
     {
         public int Id { get; set; }
-        public string Type { get; set; }
+        public bool Condition { get; set; }
     }
 
     public class Comix
@@ -61,7 +61,6 @@ namespace itransition_project.Models
     public class Frame
     {
         public int Id { get; set; }
-        public string Type { get; set; }
         public string Position { get; set; }
         public string Address { get; set; }
         public virtual ICollection<Balloon> Balloons { get; set; }
@@ -84,14 +83,26 @@ namespace itransition_project.Models
     {
         public int Id { get; set; }
         public int PositionsCount { get; set; }
+        public virtual TemplateType Type { get; set; }
+    }
+
+    public class TemplateType
+    {
+        public int Id { get; set; }
         public string Type { get; set; }
     }
 
     public class Balloon
     {
         public int Id { get; set; }
-        public string Type { get; set; }
+        public virtual BalloonType Type { get; set; }
         public string Text { get; set; }
+    }
+
+    public class BalloonType
+    {
+        public int Id { get; set; }
+        public string Type { get; set; }
     }
 
     public partial class ProjectDbContext : DbContext
@@ -117,6 +128,8 @@ namespace itransition_project.Models
         public DbSet<AgeRating> AgeRatings { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Template> Templates { get; set; }
+        public DbSet<TemplateType> TemplateTypes { get; set; }
         public DbSet<Balloon> Balloons { get; set; }
+        public DbSet<BalloonType> BallonTypes { get; set; }
     }
 }
