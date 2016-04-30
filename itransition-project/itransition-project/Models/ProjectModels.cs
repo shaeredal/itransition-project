@@ -83,12 +83,6 @@ namespace itransition_project.Models
     {
         public int Id { get; set; }
         public int PositionsCount { get; set; }
-        public virtual TemplateType Type { get; set; }
-    }
-
-    public class TemplateType
-    {
-        public int Id { get; set; }
         public string Type { get; set; }
     }
 
@@ -128,7 +122,6 @@ namespace itransition_project.Models
         public DbSet<AgeRating> AgeRatings { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Template> Templates { get; set; }
-        public DbSet<TemplateType> TemplateTypes { get; set; }
         public DbSet<Balloon> Balloons { get; set; }
         public DbSet<BalloonType> BallonTypes { get; set; }
     }
