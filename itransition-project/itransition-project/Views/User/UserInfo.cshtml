@@ -1,4 +1,4 @@
-﻿
+﻿@model itransition_project.Models.Profile
 @{
     ViewBag.Title = "UserInfo";
 }
@@ -22,7 +22,7 @@
             </div>
             <div class="list-group-item">
                 <label class="glyphicon glyphicon-comment"></label>
-                <span class="pull-right">INFO</span>
+                <span class="pull-right">@Model.About</span>
             </div>
         </div>
     </div>
