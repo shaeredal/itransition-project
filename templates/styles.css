@@ -1,0 +1,17 @@
+
+#a {
+	width: 500px;
+	height: 500px;
+}
+
+#b {
+	background-image: url("1.jpg");
+	background-color: black;
+	float: left;
+/*	shape-outside: polygon(10px 300px, 10px 10px, 490px 10px, 490px 200px);*/
+	shape-outside: circle(50%);
+	shape-inside: circle(50%);
+	width: 400px;
+	height: 400px;
+}
+
