@@ -1,7 +1,4 @@
-﻿@model itransition_project.Models.Profile
-@{
-    ViewBag.Title = "UserInfo";
-}
+﻿@model Tuple<itransition_project.Models.Profile, itransition_project.Models.Comment>
 
 <h2>UserInfo</h2>
 <div class="col-md-3">
@@ -11,32 +8,21 @@
         </div>
         <div class="panel-body list-group">
             <div class="list-group-item">
-                <label class="fa fa-male fa-4x" style="font-size: 20px"></label>
-                <span class="pull-right">INFO</span>
-            </div>
-            <div class="list-group-item">
-                <label class="glyphicon glyphicon-time"></label>
-                <span class="pull-right">
-                    INFO
-                </span>
-            </div>
-            <div class="list-group-item">
                 <label class="glyphicon glyphicon-comment"></label>
-                <span class="pull-right">@Model.About</span>
+                <span class="pull-right">@Model.Item1.About</span>
             </div>
         </div>
     </div>
     <h3>Medal</h3>
     <img src="" />
-    <form>
-        <fieldset >
-            <div class="form-group">
-                <label for="TextInput">Input comment</label>
-                <textarea id="TextInput" class="form-control" rows="3"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </fieldset>
-    </form>
-
+    
+    @using (Html.BeginForm("UserInfo", "User", FormMethod.Post))
+    {
+        @Html.LabelFor(model => model.Item2.Text, "Text")
+        <br/>
+        @Html.Editor("text")
+        <br /><br />
+        <input type="submit" value="Добавить" />
+    }
 </div>
 

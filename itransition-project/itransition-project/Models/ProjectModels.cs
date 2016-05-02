@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace itransition_project.Models
 {
@@ -103,6 +104,8 @@ namespace itransition_project.Models
     {
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<ApplicationUser>()
                 .HasRequired(s => s.Profile)
                 .WithRequiredPrincipal(s => s.User);
@@ -110,6 +113,10 @@ namespace itransition_project.Models
             modelBuilder.Entity<Profile>()
                 .HasRequired(s => s.User)
                 .WithRequiredDependent(s => s.Profile);
+
+            modelBuilder.Entity<IdentityUserLogin>().HasKey<string>(l => l.UserId);
+            modelBuilder.Entity<IdentityRole>().HasKey<string>(r => r.Id);
+            modelBuilder.Entity<IdentityUserRole>().HasKey(r => new { r.RoleId, r.UserId });
         }
 
         public DbSet<Profile> Profiles { get; set; }
