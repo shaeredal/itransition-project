@@ -224,7 +224,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\PageController.cs" />
+    <Compile Include="Controllers\ComixController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -244,6 +244,14 @@
     <Compile Include="Migrations\201604292254540_modifydb.cs" />
     <Compile Include="Migrations\201604292254540_modifydb.Designer.cs">
       <DependentUpon>201604292254540_modifydb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605012200306_IssueFixing.cs" />
+    <Compile Include="Migrations\201605012200306_IssueFixing.Designer.cs">
+      <DependentUpon>201605012200306_IssueFixing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605021401502_moreFixes.cs" />
+    <Compile Include="Migrations\201605021401502_moreFixes.Designer.cs">
+      <DependentUpon>201605021401502_moreFixes.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -1099,7 +1107,7 @@
     <Content Include="Scripts\version.json" />
     <Content Include="Views\User\UserInfo.cshtml" />
     <Content Include="Views\User\EditDetails.cshtml" />
-    <Content Include="Views\Page\Index.cshtml" />
+    <Content Include="Views\Comix\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1128,6 +1136,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604292254540_modifydb.resx">
       <DependentUpon>201604292254540_modifydb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605012200306_IssueFixing.resx">
+      <DependentUpon>201605012200306_IssueFixing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605021401502_moreFixes.resx">
+      <DependentUpon>201605021401502_moreFixes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
