@@ -44,7 +44,7 @@ namespace itransition_project.Controllers
                 user = manager.FindById(System.Web.HttpContext.
                     Current.User.Identity.GetUserId());
             }
-            using (var dbContext = new ProjectDbContext())
+            using (var dbContext = new ApplicationDbContext())
             {
                 comment.Author = user;
                 comment.Time = DateTime.Now;
@@ -69,7 +69,7 @@ namespace itransition_project.Controllers
         [HttpPost]
         public ActionResult EditDetails(itransition_project.Models.Profile profile)
         {
-            ProjectDbContext db = new ProjectDbContext();
+            ApplicationDbContext db = new ApplicationDbContext();
             ApplicationUser appUser = System.Web.HttpContext.Current.GetOwinContext().
                 GetUserManager<ApplicationUserManager>().
                 FindById(System.Web.HttpContext.
