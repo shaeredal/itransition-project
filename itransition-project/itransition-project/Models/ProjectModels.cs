@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
@@ -100,6 +101,7 @@ namespace itransition_project.Models
         public string Type { get; set; }
     }
 
+<<<<<<< HEAD
     public partial class ProjectDbContext : DbContext
     {
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -132,4 +134,42 @@ namespace itransition_project.Models
         public DbSet<Balloon> Balloons { get; set; }
         public DbSet<BalloonType> BallonTypes { get; set; }
     }
+=======
+    //public partial class ProjectDbContext : DbContext
+    //{
+
+    //    public ProjectDbContext() : base("DefaultConnection")
+    //    {
+    //    }
+
+    //    protected override void OnModelCreating(DbModelBuilder modelBuilder)
+    //    {
+    //        //base.OnModelCreating(modelBuilder);
+    //        modelBuilder.Entity<IdentityUserLogin>().HasKey<string>(l => l.UserId);
+    //        modelBuilder.Entity<IdentityRole>().HasKey<string>(r => r.Id);
+    //        modelBuilder.Entity<IdentityUserRole>().HasKey(r => new { r.RoleId, r.UserId });
+
+    //        modelBuilder.Entity<ApplicationUser>()
+    //            .HasRequired(s => s.Profile)
+    //            .WithRequiredPrincipal(s => s.User);
+
+    //        modelBuilder.Entity<Profile>()
+    //            .HasRequired(s => s.User)
+    //            .WithRequiredDependent(s => s.Profile);
+    //    }
+
+    //    public DbSet<Profile> Profiles { get; set; }
+    //    public DbSet<Comment> Comments { get; set; }
+    //    public DbSet<Medal> Medals { get; set; }
+    //    public DbSet<Rating> Ratings { get; set; }
+    //    public DbSet<Comix> Comixes { get; set; }
+    //    public DbSet<Page> Pages { get; set; }
+    //    public DbSet<Frame> Frames { get; set; }
+    //    public DbSet<AgeRating> AgeRatings { get; set; }
+    //    public DbSet<Tag> Tags { get; set; }
+    //    public DbSet<Template> Templates { get; set; }
+    //    public DbSet<Balloon> Balloons { get; set; }
+    //    public DbSet<BalloonType> BallonTypes { get; set; }
+    //}
+>>>>>>> a7ccec9b846e44ec0ba07f5cc5b01c468a2e3de9
 }
