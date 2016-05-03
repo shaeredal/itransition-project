@@ -1,0 +1,64 @@
+body {
+	background: #A600A6;
+}
+
+#comic_wrapper {
+	margin: 10% auto;
+	width: 500px;
+	height: 500px;
+	background: #FFBE00;
+}
+
+.frame {
+	width: 480px;
+	height: 300px;
+	left: 10px;
+	transform: skewY(-15deg);
+	background: transparent;
+	position: relative;
+	overflow: hidden;
+}
+
+#first_frame {
+	top: -55px;
+}
+
+#second_frame {
+	top: -45px;
+}
+
+.inner-frame {
+	width: 480px;
+	height: 300px;
+	transform: skewY(15deg);
+	background: #00AE68;
+	position: relative;
+	overflow: hidden;
+}
+
+#first_inner_frame {
+	top: 65px;
+}
+
+#second_inner_frame {
+	top: -65px;
+}
+
+.frame-image {
+	display: block;
+	border: 0;
+  	width: 480px;
+  	height: 300px;
+  	background-size: cover;
+  	position: relative;
+}
+
+#first_frame_image {
+  	background: url('http://lorempixel.com/1000/1000/');
+  	background-size: cover;
+}
+
+#second_frame_image {
+  	background: url('http://lorempixel.com/500/700/');
+  	background-size: cover;
+}
