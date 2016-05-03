@@ -16,19 +16,37 @@
         </div>
     </div>
     <h3>Medal</h3>
-    <img src="" />
-    @foreach (var item in Model.Comments)
-    {
-        <div> @item.Author.UserName || @item.Text || @item.Time</div>
-    }
+    <img src=""/>
+    
+            @foreach (var item in Model.Comments)
+            {
+                <div class="row">
+                    <div class="col-xs-1">
+                        <a href="../../User/UserInfo/@item.Author.UserName"><img ng-src="@item.Author.Profile.Photo" class="img-circle img-responsive" style="width: 150px; min-width: 29px"></a>
+                    </div>
+                    <div class="col-xs-11">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                @item.Text<br>
+                                <span class="label label-info">@item.Time</span>
+                                <div class="pull-right">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+               </div>        
+            }
 
-    @using (Html.BeginForm("UserInfo", "User", FormMethod.Post))
-    {
-        @Html.LabelFor(model => model.Comments.First().Text, "Text")
-        <br/>
-        @Html.Editor("text")
-        <br /><br />
-        <input type="submit" value="Добавить" />
-    }
-</div>
+                                @using (Html.BeginForm("UserInfo", "User", FormMethod.Post))
+                {
+                                    @Html.LabelFor(model => model.Comments.First().Text, "Text")
+                                    <br />
+                                    @Html.Editor("text")
+                                    <br /><br />
+                                    <input type="submit" value="Добавить" />
+                                }
+    </div>
+
+
+
 
