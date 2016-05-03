@@ -1,24 +1,30 @@
-﻿@model Tuple<itransition_project.Models.Profile, itransition_project.Models.Comment>
+﻿@model itransition_project.Models.UserInfoViewModel
 
 <h2>UserInfo</h2>
 <div class="col-md-3">
     <div class="panel-default">
-        <div class="panel-heading">
-            <img class="" />
+        <div class="panel-heading text-center">
+            <div>@Model.Profile.UserName</div>
+            <img class="avatar-cropped-small" src="@Model.Profile.Profile.Photo"/>
         </div>
         <div class="panel-body list-group">
             <div class="list-group-item">
                 <label class="glyphicon glyphicon-comment"></label>
-                <span class="pull-right">@Model.Item1.About</span>
+                <span class="pull-right">@Model.Profile.Profile.About</span>
+                
             </div>
         </div>
     </div>
     <h3>Medal</h3>
     <img src="" />
-    
+    @foreach (var item in Model.Comments)
+    {
+        <div> @item.Author.UserName || @item.Text || @item.Time</div>
+    }
+
     @using (Html.BeginForm("UserInfo", "User", FormMethod.Post))
     {
-        @Html.LabelFor(model => model.Item2.Text, "Text")
+        @Html.LabelFor(model => model.Comments.First().Text, "Text")
         <br/>
         @Html.Editor("text")
         <br /><br />

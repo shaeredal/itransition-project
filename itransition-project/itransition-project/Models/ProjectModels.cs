@@ -28,6 +28,7 @@ namespace itransition_project.Models
         public string Text { get; set; }
         public DateTime Time { get; set; }
         public virtual ApplicationUser Author { get; set; }
+        public virtual Profile Profile { get; set; }
     }
 
     public class Medal

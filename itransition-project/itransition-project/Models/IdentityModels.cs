@@ -45,9 +45,9 @@ namespace itransition_project.Models
                 .HasRequired(s => s.Profile)
                 .WithRequiredPrincipal(s => s.User);
 
-            modelBuilder.Entity<Profile>()
-                .HasRequired(s => s.User)
-                .WithRequiredDependent(s => s.Profile);
+            //modelBuilder.Entity<Profile>()
+            //    .HasRequired(s => s.User)
+            //    .WithRequiredDependent(s => s.Profile);
         }
 
         public DbSet<Profile> Profiles { get; set; }
