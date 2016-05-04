@@ -14,12 +14,16 @@ namespace itransition_project.Controllers
         // GET: Page
         public ActionResult Index(int id)
         {
-            //var db = HttpContext.GetOwinContext().Get<ProjectDbContext>();
             var db = new ApplicationDbContext();
             var comixModel = db.Comixes.FirstOrDefault(x => x.Id.Equals(id));
             //var comixViewModel = Mapper.Map<Comix, ComixViewModel>(comixModel);
             //return View(comixViewModel);
             return View(comixModel);
+        }
+
+        public ActionResult AddComix()
+        {
+            return View();
         }
     }
 }
