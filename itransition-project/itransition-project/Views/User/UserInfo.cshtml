@@ -1,11 +1,10 @@
 ﻿@model itransition_project.Models.UserInfoViewModel
 
-<h2>UserInfo</h2>
+<h2>@Model.Profile.UserName</h2>
 <div class="col-md-3">
     <div class="panel-default">
         <div class="panel-heading text-center">
-            <div>@Model.Profile.UserName</div>
-            <img class="avatar-cropped-small" src="@Model.Profile.Profile.Photo"/>
+            <img class="avatar-cropped-small" src="@Model.Profile.Profile.Photo" width="200" height="200"/>
         </div>
         <div class="panel-body list-group">
             <div class="list-group-item">
@@ -17,14 +16,23 @@
     </div>
     <h3>Medal</h3>
     <img src=""/>
-    
+    <h4>Comments</h4>
+    @using (Html.BeginForm("UserInfo", "User", FormMethod.Post))
+    {
+        @Html.LabelFor(model => model.Comments.First().Text, "Text")
+        <br />
+                                    @*@Html.Editor("text")*@
+                                    @*<input type="text" name="text" id="text" class="form-control" placeholder="Text input" />*@
+                                    <textarea class="form-control" rows="3" type="text" name="text" id="text" placeholder="Text input"></textarea>
+                                    <input type="submit" class="btn btn-default" value="Add" />
+    }
             @foreach (var item in Model.Comments)
             {
                 <div class="row">
-                    <div class="col-xs-1">
-                        <a href="../../User/UserInfo/@item.Author.UserName"><img ng-src="@item.Author.Profile.Photo" class="img-circle img-responsive" style="width: 150px; min-width: 29px"></a>
+                    <div class="col-xs-4">
+                    <a href="../../User/UserInfo/@item.Author.UserName"><img ng-src="@item.Author.Profile.Photo" class="img-circle img-responsive" style="width: 150px; min-width: 29px"></a><span>@item.Author.UserName</span>
                     </div>
-                    <div class="col-xs-11">
+                    <div class="col-xs-8">
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 @item.Text<br>
@@ -34,17 +42,13 @@
                             </div>
                         </div>
                     </div>
+
                </div>        
+
+
             }
 
-                                @using (Html.BeginForm("UserInfo", "User", FormMethod.Post))
-                {
-                                    @Html.LabelFor(model => model.Comments.First().Text, "Text")
-                                    <br />
-                                    @Html.Editor("text")
-                                    <br /><br />
-                                    <input type="submit" value="Добавить" />
-                                }
+                                
     </div>
 
 
