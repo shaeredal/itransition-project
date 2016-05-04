@@ -254,6 +254,10 @@
     <Compile Include="Migrations\201605021401502_moreFixes.Designer.cs">
       <DependentUpon>201605021401502_moreFixes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605041607259_medalsUpdate.cs" />
+    <Compile Include="Migrations\201605041607259_medalsUpdate.Designer.cs">
+      <DependentUpon>201605041607259_medalsUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CommentViewModel.cs" />
@@ -1189,6 +1193,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605021401502_moreFixes.resx">
       <DependentUpon>201605021401502_moreFixes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605041607259_medalsUpdate.resx">
+      <DependentUpon>201605041607259_medalsUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,4 +1,4 @@
-$(function() {
+function make_it_draggable() {
     $( ".frame-image" ).draggable();
     $( ".frame-image" ).resizable();
     $('.frame-image').bind('mousewheel', function(e){
@@ -12,4 +12,6 @@ $(function() {
         }
         return false;
     });
-});
+};
+
+//$(function () { make_it_draggable() });
