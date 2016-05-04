@@ -152,7 +152,11 @@ namespace itransition_project.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
-                user.Profile = new Profile();
+                user.Profile = new Profile()
+                {
+                    Photo =
+                        "http://res.cloudinary.com/da40pd4iw/image/upload/v1460917537/%D0%9F%D0%B8%D0%B2%D0%BE_y9a59r.jpg"
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
