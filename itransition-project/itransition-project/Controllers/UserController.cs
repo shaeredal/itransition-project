@@ -3,6 +3,7 @@ using CloudinaryDotNet.Actions;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.Caching;
@@ -111,6 +112,50 @@ namespace itransition_project.Controllers
             return RedirectToAction("UserInfo", "User");
         }
 
+        [HttpPost]
+        public JsonResult UpdateImage(string data)
+        {
+            var account = new Account(
+                "da40pd4iw",
+            "878111261769614",
+            "d_UzO32EJIqhtFnshPcdgalOFeg");
+
+            var cloudinary = new Cloudinary(account);
+
+            var uploadParams = new ImageUploadParams
+            {
+                File = new FileDescription(data)
+            };
+            var uploadResult = cloudinary.Upload(uploadParams);
+            var user = System.Web.HttpContext.Current.GetOwinContext().
+                GetUserManager<ApplicationUserManager>().
+                FindById(System.Web.HttpContext.
+                Current.User.Identity.GetUserId());
+            user.Profile.Photo = uploadResult.SecureUri.ToString();
+            System.Web.HttpContext.Current.GetOwinContext().
+                GetUserManager<ApplicationUserManager>().Update(user);
+            return new JsonResult();
+        }
+
+        public ActionResult GetCurrentUserImage(string id)
+        {
+            var user = System.Web.HttpContext.Current.GetOwinContext().
+                GetUserManager<ApplicationUserManager>().
+                FindById(System.Web.HttpContext.
+                Current.User.Identity.GetUserId());
+            return Content(user.Profile.Photo);
+        }
+
+        [HttpPost]
+        public ActionResult PostImage(HttpPostedFileBase helpSectionImages)
+        {
+            if (System.Web.HttpContext.Current.Request.Files.AllKeys.Any())
+            {
+                var pic = System.Web.HttpContext.Current.Request.Files["helpSectionImages"];
+                Image img = Bitmap.FromStream(pic.InputStream);
+            }
+            return RedirectToAction("UserInfo", "User");
+        }
 
 
     }
