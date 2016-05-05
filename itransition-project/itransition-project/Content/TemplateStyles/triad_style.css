@@ -2,7 +2,8 @@
 	margin: auto;
 	width: 680px;
 	height: 680px;
-	background: #AAAAAA;
+	background: white;
+    border: solid 1px black;
 }
 
 .frame {
@@ -32,7 +33,7 @@
 }
 
 .inner-frame {
-	background: #FFFFFF;
+	background: #AAAAAA;
 	position: relative;
 	overflow: hidden;
 }
@@ -60,25 +61,21 @@
 	border: 0;
   	background-size: cover;
   	position: relative;
+    background-size: cover;
+    background: #333333;
 }
 
 #first_frame_image {
-  	background: url('http://lorempixel.com/1000/1000/');
-  	background-size: cover;
   	width: 660px;
 	height: 415px;
 }
 
 #second_frame_image {
-  	background: url('http://lorempixel.com/500/700/');
-  	background-size: cover;
   	width: 325px;
 	height: 415px;
 }
 
 #third_frame_image {
-  	background: url('http://lorempixel.com/700/500/');
-  	background-size: cover;
   	width: 325px;
 	height: 415px;
 }

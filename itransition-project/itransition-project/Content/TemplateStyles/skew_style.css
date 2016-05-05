@@ -2,7 +2,8 @@
 	margin: auto;
 	width: 680px;
 	height: 680px;
-	background: #AAAAAA;
+	background: white;
+    border: solid 1px black;
 }
 
 .frame, .inner-frame, .frame-image {
@@ -28,7 +29,7 @@
 
 .inner-frame {
 	transform: skewY(15deg);
-	background: #FFFFFF;
+	background: #AAAAAA;
 	position: relative;
 	overflow: hidden;
 }
@@ -46,14 +47,6 @@
 	border: 0;
   	background-size: cover;
   	position: relative;
-}
-
-#first_frame_image {
-  	background: url('http://lorempixel.com/1000/1000/');
-  	background-size: cover;
-}
-
-#second_frame_image {
-  	background: url('http://lorempixel.com/500/700/');
-  	background-size: cover;
+    background-size: cover;
+    background: #333333;
 }

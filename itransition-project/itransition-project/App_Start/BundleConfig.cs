@@ -28,10 +28,10 @@ namespace itransition_project
                       "~/Content/themes/base/all.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/template").Include(
-                        "~/Scripts/templates_script.js"));
+                        "~/Scripts/app/templates_script.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/AddComix").Include(
-                        "~/Scripts/AddComix.js"));
+                        "~/Scripts/app/AddComix.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
