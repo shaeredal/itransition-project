@@ -34,6 +34,9 @@ namespace itransition_project
             bundles.Add(new ScriptBundle("~/Content/DragAndDrop").Include(
                         "~/Content/DragAndDrop.css"));
 
+            bundles.Add(new ScriptBundle("~/bundles/AddComix").Include(
+                        "~/Scripts/AddComix.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
