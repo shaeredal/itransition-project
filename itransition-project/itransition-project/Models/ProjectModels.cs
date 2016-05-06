@@ -36,6 +36,7 @@ namespace itransition_project.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Image { get; set; }
+        public virtual Profile Profile { get; set; }
     }
 
     public class Rating

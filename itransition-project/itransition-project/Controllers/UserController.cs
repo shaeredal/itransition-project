@@ -1,96 +1,68 @@
-﻿using CloudinaryDotNet;
-using CloudinaryDotNet.Actions;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Drawing;
+﻿using System;
 using System.Linq;
 using System.Web;
-using System.Web.Caching;
 using System.Web.Mvc;
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
 using itransition_project.Models;
-using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using itransition_project;
 
 namespace itransition_project.Controllers
 {
     public class UserController : Controller
     {
-        public static ApplicationUser curUser;
         public static string UserPageId;
         // GET: User
         [HttpGet]
         public ActionResult UserInfo(string id)
         {
             ApplicationDbContext db = new ApplicationDbContext();
-            
+
             if (db.Users.Any(o => o.UserName == id))
             {
-                ApplicationUser appUser = System.Web.HttpContext.Current.GetOwinContext().
-                    GetUserManager<ApplicationUserManager>().
-                    FindById(System.Web.HttpContext.
-                    Current.User.Identity.GetUserId());
-                //var first = db.Users.First(o => o.UserName == id);
-                //var second = new Comment();
                 UserPageId = id;
-                curUser = appUser;
-                //return View(Tuple.Create(first.Profile,second));
-
-                var model = new UserInfoViewModel()
+                var model = new UserInfoViewModel
                 {
-                    Comments = db.Comments.Where(o=>o.Profile.User.UserName == id).ToList(),
-                    Profile = db.Users.First(o => o.UserName == id)
+                    Comments = db.Comments.Where(o => o.Profile.User.UserName == id).OrderByDescending(x => x.Time).ToList(),
+                    Profile = db.Users.First(o => o.UserName == id),
+                    Medals = db.Medals.Where(o => o.Profile.User.UserName == id).ToList()
                 };
                 return View(model);
             }
-            else
-            {
-                return View("Error");
-            }
-            
+            return View("Error");
         }
 
         [HttpPost]
-        public ActionResult UserInfo(itransition_project.Models.Comment comment)
+        public ActionResult UserInfo(string text, string userId)
         {
-            //ApplicationUser user;
-            //using (var manager = System.Web.HttpContext.Current.GetOwinContext().
-            //    GetUserManager<ApplicationUserManager>())
-            //{
-            //    user = manager.FindById(System.Web.HttpContext.
-            //        Current.User.Identity.GetUserId());
-            //}
-            //using (var dbContext = new ApplicationDbContext())
-            //{
-            //    comment.Author = user;
-            //    comment.Time = DateTime.Now;
-            //    dbContext.Comments.Add(comment);
-            //    dbContext.SaveChanges();
-            //}
-
             var dbContext = new ApplicationDbContext();
-            //ApplicationUser appUser = System.Web.HttpContext.Current.GetOwinContext().
-            //    GetUserManager<ApplicationUserManager>().
-            //    FindById(System.Web.HttpContext.
-            //    Current.User.Identity.GetUserId());
-
-            var first = dbContext.Users.First(o => o.UserName == UserPageId);
-            comment.Time = DateTime.Now;
-            comment.Author = dbContext.Users.First(o => o.UserName == curUser.UserName);
-            first.Profile.Comments.Add(comment);
-
-            
-            //appUser.Profile.Comments.Add(comment);
+            var currentUserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            var currentAppUser = dbContext.Users.First(x => x.Id == currentUserId);
+            var user = dbContext.Users.First(x => x.Id == userId);
+            var comment = new Comment
+            {
+                Time = DateTime.Now,
+                Author = currentAppUser,
+                Text = text
+            };
+            user.Profile.Comments.Add(comment);
+            if (!dbContext.Comments.Any(x => x.Author.Id == currentUserId))
+            {
+                currentAppUser.Profile.Medals.Add(new Medal
+                {
+                    Image = "http://res.cloudinary.com/da40pd4iw/image/upload/v1462468044/medal_comments_vquan0.png",
+                    Name = "First Comment",
+                    Profile = currentAppUser.Profile
+                });
+            }
             dbContext.SaveChanges();
-            return RedirectToAction("UserInfo", "User"/*, user.UserName*/);
+            return RedirectToAction("UserInfo", "User");
         }
 
         [HttpGet]
         public ActionResult EditDetails()
         {
-            ApplicationDbContext db = new ApplicationDbContext();
             ApplicationUser appUser = System.Web.HttpContext.Current.GetOwinContext().
                 GetUserManager<ApplicationUserManager>().
                 FindById(System.Web.HttpContext.
@@ -99,9 +71,8 @@ namespace itransition_project.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditDetails(itransition_project.Models.Profile profile)
+        public ActionResult EditDetails(Profile profile)
         {
-            ApplicationDbContext db = new ApplicationDbContext();
             ApplicationUser appUser = System.Web.HttpContext.Current.GetOwinContext().
                 GetUserManager<ApplicationUserManager>().
                 FindById(System.Web.HttpContext.
@@ -115,6 +86,7 @@ namespace itransition_project.Controllers
         [HttpPost]
         public JsonResult UpdateImage(string data)
         {
+            var dbContext = new ApplicationDbContext();
             var account = new Account(
                 "da40pd4iw",
             "878111261769614",
@@ -131,32 +103,22 @@ namespace itransition_project.Controllers
                 GetUserManager<ApplicationUserManager>().
                 FindById(System.Web.HttpContext.
                 Current.User.Identity.GetUserId());
+            if (user.Profile.Photo == "http://res.cloudinary.com/da40pd4iw/image/upload/v1460917537/%D0%9F%D0%B8%D0%B2%D0%BE_y9a59r.jpg")
+            {
+                user.Profile.Medals.Add(new Medal
+                {
+                    Image = "http://res.cloudinary.com/da40pd4iw/image/upload/v1462468044/medal_profile_t9bltt.png",
+                    Name = "Photo add",
+                    Profile = user.Profile
+                });
+            }
             user.Profile.Photo = uploadResult.SecureUri.ToString();
+            
+            
             System.Web.HttpContext.Current.GetOwinContext().
                 GetUserManager<ApplicationUserManager>().Update(user);
+            dbContext.SaveChanges();
             return new JsonResult();
         }
-
-        public ActionResult GetCurrentUserImage(string id)
-        {
-            var user = System.Web.HttpContext.Current.GetOwinContext().
-                GetUserManager<ApplicationUserManager>().
-                FindById(System.Web.HttpContext.
-                Current.User.Identity.GetUserId());
-            return Content(user.Profile.Photo);
-        }
-
-        [HttpPost]
-        public ActionResult PostImage(HttpPostedFileBase helpSectionImages)
-        {
-            if (System.Web.HttpContext.Current.Request.Files.AllKeys.Any())
-            {
-                var pic = System.Web.HttpContext.Current.Request.Files["helpSectionImages"];
-                Image img = Bitmap.FromStream(pic.InputStream);
-            }
-            return RedirectToAction("UserInfo", "User");
-        }
-
-
     }
 }
