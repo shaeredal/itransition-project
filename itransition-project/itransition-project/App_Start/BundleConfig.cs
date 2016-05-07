@@ -31,11 +31,12 @@ namespace itransition_project
 
             bundles.Add(new ScriptBundle("~/bundles/template").Include(
                         "~/Scripts/templates_script.js"));
+
             bundles.Add(new ScriptBundle("~/Content/DragAndDrop").Include(
-                        "~/Content/DragAndDrop.css"));
+                "~/Content/DragAndDrop.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/AddComix").Include(
-                        "~/Scripts/AddComix.js"));
+                        "~/Scripts/app/AddComix.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
