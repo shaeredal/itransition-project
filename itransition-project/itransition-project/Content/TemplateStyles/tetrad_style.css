@@ -1,4 +1,4 @@
-#comic_wrapper {
+#comic_wrapper_tetrad {
     margin: auto;
 	width: 680px;
 	height: 680px;
@@ -6,59 +6,59 @@
     border: solid 1px black;
 }
 
-.frame, .inner-frame, .frame-image {
+#comic_wrapper_tetrad .frame, #comic_wrapper_tetrad .inner-frame, #comic_wrapper_tetrad .frame-image {
 	width: 325px;
 	height: 415px;
 }
 
-.frame {
+#comic_wrapper_tetrad .frame {
 	left: 10px;
 	background: transparent;
 	position: relative;
 	overflow: hidden;
 }
 
-#first_frame {
+#comic_wrapper_tetrad #first_frame {
 	top: -80px;
 }
 
-#second_frame {
+#comic_wrapper_tetrad #second_frame {
 	top: -495px;
 	left: 345px;
 }
 
-#third_frame {
+#comic_wrapper_tetrad #third_frame {
 	top: -485px;
 }
 
-#fourth_frame {
+#comic_wrapper_tetrad #fourth_frame {
 	top: -900px;
 	left: 345px;
 }
 
-.inner-frame {
+#comic_wrapper_tetrad .inner-frame {
 	background: #AAAAAA;
 	position: relative;
 	overflow: hidden;
 }
 
-#first_inner_frame {
+#comic_wrapper_tetrad #first_inner_frame {
 	top: 90px;
 }
 
-#second_inner_frame {
+#comic_wrapper_tetrad #second_inner_frame {
 	top: 90px;
 }
 
-#third_inner_frame {
+#comic_wrapper_tetrad #third_inner_frame {
 	top: -90px;
 }
 
-#fourth_inner_frame {
+#comic_wrapper_tetrad #fourth_inner_frame {
 	top: -90px;
 }
 
-.frame-image {
+#comic_wrapper_tetrad .frame-image {
 	display: block;
 	border: 0;
   	background-size: cover;
