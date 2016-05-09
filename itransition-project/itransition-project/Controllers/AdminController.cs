@@ -11,8 +11,11 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace itransition_project.Controllers
 {
+
     public class AdminController : Controller
     {
+        const int pageSize = 3;
+
         [HttpGet]
         [Authorize(Roles = "admin")]
         public ActionResult EditDetails(string id)
@@ -57,6 +60,30 @@ namespace itransition_project.Controllers
             user.Profile.Photo = uploadResult.SecureUri.ToString();
             dbContext.SaveChanges();
             return new JsonResult();
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "admin")]
+        public ActionResult AllUsers(int? id)
+        {
+            var dbContext = new ApplicationDbContext();
+            int page = id ?? 0;
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_Users", GetItemsPage(page));
+            }
+            return View(GetItemsPage(page));
+
+        }
+
+        private List<Profile> GetItemsPage(int page = 1)
+        {
+            var dbContext = new ApplicationDbContext();
+            var profiles = dbContext.Profiles;
+            var itemsToSkip = page * pageSize;
+
+            return profiles.OrderBy(t => t.Id).Skip(itemsToSkip).
+                Take(pageSize).ToList();
         }
     }
 }
