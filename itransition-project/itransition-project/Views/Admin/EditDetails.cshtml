@@ -1,0 +1,33 @@
+﻿@model itransition_project.Models.Profile
+
+@{
+    ViewBag.Title = "Admin";
+}
+
+<h2>@Model.User.Profile.User.UserName</h2>
+@using (Html.BeginForm("EditDetails", "Admin", FormMethod.Post))
+{
+    <fieldset>
+        @Html.HiddenFor(m => m.Id)
+        <p>
+            <br />
+            <input type="text" class="form-control" placeholder="Text input"name="about" id="about">
+            @Html.Hidden("id", Model.Id)
+        </p>
+        <p><input type="submit" value="Отправить" /></p>
+    </fieldset>
+}
+
+<div id="userActions">
+    <p>Drag &amp; Drop Image</p>
+    <img id="imgPrime" type="file" id="fileUpload" src="@Model.Photo"/>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/DragAndDrop")
+    @Styles.Render("~/Content/DragAndDrop")
+
+}

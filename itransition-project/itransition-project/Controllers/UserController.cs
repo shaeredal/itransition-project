@@ -84,6 +84,16 @@ namespace itransition_project.Controllers
         }
 
         [HttpPost]
+        public ActionResult DelComment(int data)
+        {
+            var dbContext = new ApplicationDbContext();
+            Comment comment = dbContext.Comments.First(x => x.Id == data);
+            dbContext.Comments.Remove(comment);
+            dbContext.SaveChanges();
+            return RedirectToAction("UserInfo", "User");
+        }
+
+        [HttpPost]
         public JsonResult UpdateImage(string data)
         {
             var dbContext = new ApplicationDbContext();

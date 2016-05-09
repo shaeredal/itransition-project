@@ -17,6 +17,7 @@
 /// <reference path="angular-touch.min.js" />
 /// <reference path="app/addcomix.js" />
 /// <reference path="app/templates_script.js" />
+/// <reference path="app/userinfo.js" />
 /// <reference path="bootstrap.js" />
 /// <reference path="draganddrop.js" />
 /// <reference path="jquery.validate.js" />
