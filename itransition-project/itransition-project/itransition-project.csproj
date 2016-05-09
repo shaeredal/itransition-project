@@ -271,6 +271,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\app\balloons_styles.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\DragAndDrop.css" />
@@ -1123,7 +1124,11 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\app\templates_script.js" />
     <Content Include="Scripts\_references.js" />
+<<<<<<< HEAD
     <Content Include="Views\Admin\EditDetails.cshtml" />
+=======
+    <Content Include="Views\Comix\ComixPage.cshtml" />
+>>>>>>> 623e0490fc438741aa1f7a0cb2ccda81a7639556
     <None Include="Views\Templates\Triad.cshtml" />
     <None Include="Views\Templates\Tetrad.cshtml" />
     <Content Include="Web.config" />

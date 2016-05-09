@@ -3,7 +3,10 @@ app.controller('switchTemplateController', function ($scope) {
     $scope.items = ['skew', 'triad', 'tetrad'];
     //$scope.$watch('selection', function () { make_it_draggable(); })
     $scope.selection = $scope.items[0];
-    
+    //$scope.drgbl = make_it_draggable;
+    //$scope.$on('$viewContentLoaded', function () {
+    //    $scope.drgbl();
+    //});
 });
 
 app.directive('fileDropzone', function () {
@@ -74,4 +77,33 @@ app.directive('fileDropzone', function () {
 app.controller('dragndrop', function ($scope) {
         $scope.image = null
         $scope.imageFileName = ''
-    });
+});
+
+
+
+app.controller("pagesController", function ($scope) {
+    $scope.page = '/Comix/ComixPage';
+    $scope.drgbl = make_it_draggable;
+}).directive("comixManager", function ($compile) {
+    return {
+        templateUrl: '/Comix/ComixPage',
+        restrict: 'E',
+        link: function (scope, elm) {
+            scope.add = function () {
+                console.log(elm);
+                elm.after($compile('<comix-manager></comix-manager>')(scope));
+                //scope.test();
+            }
+        }
+    };
+});
+
+//app.directive('drgbl', function($timeout) {
+//    return {
+//        link: function(scope, element, attr) {
+//            $timeout(function() {
+//                make_it_draggable();
+//                });
+//        }
+//    }
+//});

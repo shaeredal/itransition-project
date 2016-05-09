@@ -25,5 +25,10 @@ namespace itransition_project.Controllers
         {
             return View();
         }
+        
+        public ActionResult ComixPage()
+        {
+            return View();
+        }
     }
 }
