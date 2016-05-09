@@ -14,11 +14,17 @@ namespace itransition_project.Controllers
     public class AdminController : Controller
     {
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public ActionResult EditDetails(string id)
         {
             var dbContext = new ApplicationDbContext();
-            var user = dbContext.Users.First(x => x.UserName == id);
-            return View(user.Profile);
+            if (dbContext.Users.Any(x => x.UserName == id))
+            {
+                var user = dbContext.Users.First(x => x.UserName == id);
+                return View(user.Profile);
+            }
+            return View("Error");
+            
         }
 
         [HttpPost]
@@ -32,7 +38,7 @@ namespace itransition_project.Controllers
         }
 
         [HttpPost]
-        public JsonResult UpdateImage(string data)
+        public JsonResult UpdateImage(string data, string id)
         {
             var dbContext = new ApplicationDbContext();
             var account = new Account(
@@ -47,24 +53,8 @@ namespace itransition_project.Controllers
                 File = new FileDescription(data)
             };
             var uploadResult = cloudinary.Upload(uploadParams);
-            var user = System.Web.HttpContext.Current.GetOwinContext().
-                GetUserManager<ApplicationUserManager>().
-                FindById(System.Web.HttpContext.
-                Current.User.Identity.GetUserId());
-            if (user.Profile.Photo == "http://res.cloudinary.com/da40pd4iw/image/upload/v1460917537/%D0%9F%D0%B8%D0%B2%D0%BE_y9a59r.jpg")
-            {
-                user.Profile.Medals.Add(new Medal
-                {
-                    Image = "http://res.cloudinary.com/da40pd4iw/image/upload/v1462468044/medal_profile_t9bltt.png",
-                    Name = "Photo add",
-                    Profile = user.Profile
-                });
-            }
+            var user = dbContext.Users.First(x => x.UserName == id);
             user.Profile.Photo = uploadResult.SecureUri.ToString();
-
-
-            System.Web.HttpContext.Current.GetOwinContext().
-                GetUserManager<ApplicationUserManager>().Update(user);
             dbContext.SaveChanges();
             return new JsonResult();
         }

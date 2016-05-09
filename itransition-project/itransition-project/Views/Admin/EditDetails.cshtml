@@ -4,7 +4,7 @@
     ViewBag.Title = "Admin";
 }
 
-<h2>@Model.User.Profile.User.UserName</h2>
+<h2 id ="UserName">@Model.User.Profile.User.UserName</h2>
 @using (Html.BeginForm("EditDetails", "Admin", FormMethod.Post))
 {
     <fieldset>
@@ -27,7 +27,7 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")
-    @Scripts.Render("~/bundles/DragAndDrop")
+    @Scripts.Render("~/bundles/AdminDragDrop")
     @Styles.Render("~/Content/DragAndDrop")
 
 }

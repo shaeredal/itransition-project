@@ -16,6 +16,7 @@
 /// <reference path="angular-scenario.js" />
 /// <reference path="angular-touch.min.js" />
 /// <reference path="app/addcomix.js" />
+/// <reference path="app/admindragdrop.js" />
 /// <reference path="app/templates_script.js" />
 /// <reference path="app/userinfo.js" />
 /// <reference path="bootstrap.js" />

@@ -345,6 +345,7 @@
     <Content Include="Scripts\angular-touch.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\app\AdminDragDrop.js" />
     <Content Include="Scripts\app\UserInfo.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -1124,11 +1125,8 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\app\templates_script.js" />
     <Content Include="Scripts\_references.js" />
-<<<<<<< HEAD
     <Content Include="Views\Admin\EditDetails.cshtml" />
-=======
     <Content Include="Views\Comix\ComixPage.cshtml" />
->>>>>>> 623e0490fc438741aa1f7a0cb2ccda81a7639556
     <None Include="Views\Templates\Triad.cshtml" />
     <None Include="Views\Templates\Tetrad.cshtml" />
     <Content Include="Web.config" />
