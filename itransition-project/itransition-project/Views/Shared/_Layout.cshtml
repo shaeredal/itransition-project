@@ -6,26 +6,26 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - ComixCreator</title>
     @*@Styles.Render("~/Content/css")*@
     @*@Styles.Render("~/Content/css_light")*@
-    @Styles.Render("~/Content/css_dark")
+    @*@Styles.Render("~/Content/css_dark")*@
     @Scripts.Render("~/bundles/modernizr")
     @if (Request.IsAuthenticated)
+    {
+        ApplicationUser user = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(HttpContext.Current.User.Identity.GetUserId());
+        if (user.Theme == "Light")
         {
-            ApplicationUser user = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(HttpContext.Current.User.Identity.GetUserId());
-            if (user.Theme == "Black")
-            {
-                <link href="~/Content/blackBootstrap.css" rel="stylesheet" id="stylesheet" />
-            }
-            else
-            {
-                <link href="~/Content/bootstrap.css" rel="stylesheet" id="stylesheet" />
-            }
+            @Styles.Render("~/Content/css_light")
         }
+        else
+        {
+            @Styles.Render("~/Content/css_dark")
+        }
+    }
     else
     {
-        <link href="~/Content/bootstrap.css" rel="stylesheet" id="stylesheet" />
+        @Styles.Render("~/Content/css_dark")
     }
 </head>
 <body>
@@ -46,10 +46,6 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            @*<p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>*@
-        </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
