@@ -3,10 +3,9 @@ app.controller('switchTemplateController', function ($scope) {
     $scope.items = ['skew', 'triad', 'tetrad'];
     //$scope.$watch('selection', function () { make_it_draggable(); })
     $scope.selection = $scope.items[0];
-    //$scope.drgbl = make_it_draggable;
-    //$scope.$on('$viewContentLoaded', function () {
-    //    $scope.drgbl();
-    //});
+    $scope.remove = function ($event) {
+        angular.element($event.target).parent().parent().remove();
+    }
 });
 
 app.directive('fileDropzone', function () {
@@ -17,7 +16,9 @@ app.directive('fileDropzone', function () {
                 fileName: '='
             },
             link: function (scope, element, attrs) {
+
                 var checkSize, isTypeValid, processDragOverOrEnter, validMimeTypes;
+
                 processDragOverOrEnter = function (event) {
                     if (event != null) {
                         event.preventDefault();
@@ -63,11 +64,17 @@ app.directive('fileDropzone', function () {
                             });
                         }
                     };
-                    file = event.dataTransfer.files[0];
-                    name = file.name;
-                    type = file.type;
-                    size = file.size;
-                    reader.readAsDataURL(file);
+                    try{
+                        file = event.dataTransfer.files[0];
+
+                        name = file.name;
+                        type = file.type;
+                        size = file.size;
+                        reader.readAsDataURL(file);
+                    }
+                    catch (e) {
+                        return false;
+                    }
                     return false;
                 });
             }
@@ -75,28 +82,75 @@ app.directive('fileDropzone', function () {
     });
 
 app.controller('dragndrop', function ($scope) {
-        $scope.image = null
-        $scope.imageFileName = ''
+    $scope.image = null;
+    $scope.imageFileName = '';
+    $scope.remove = function ($event) {
+        angular.element($event.target).parent().remove();
+    }
 });
 
 
 
 app.controller("pagesController", function ($scope) {
     $scope.page = '/Comix/ComixPage';
-    $scope.drgbl = make_it_draggable;
-}).directive("comixManager", function ($compile) {
+    $scope.drgbl = function () {
+        $(".frame-image").draggable({
+            //containment: "parent"
+        }).resizable();
+        $('.frame-image').bind('mousewheel', function (e) {
+            if (e.originalEvent.deltaY < 0) {
+                $(this).css("width", "+=16");
+                $(this).css("height", "+=16");
+            }
+            else {
+                $(this).css("width", "-=16");
+                $(this).css("height", "-=16");
+            }
+            return false;
+        });
+
+        $("#balloons_panel .talkbubble").draggable(
+            { helper: "clone" }).resizable({ containment: "parent" });
+
+        $(".frame-image").droppable({
+            accept: "#balloons_panel .talkbubble",
+            drop: function (event, ui) {
+                var clone = ui.draggable.clone();
+                clone.draggable({
+                    containment: "parent"
+                }).resizable({ containment: "parent" });
+                
+                clone.css("top", ui.offset.top - $(this).offset().top);
+                clone.css("left", ui.offset.left - $(this).offset().left);
+                clone.css("position", "absolute");
+
+                clone.find('.delete-cross').click(function () { clone.remove(); });
+
+                $(this).append(clone);
+            }
+        });
+    };
+    $scope.$watch(function () {
+        return angular.element;
+    }, function () {
+            $scope.$evalAsync(function () {
+                $scope.drgbl();
+            });
+        });
+    }).directive("comixManager", function ($compile) {
     return {
         templateUrl: '/Comix/ComixPage',
         restrict: 'E',
         link: function (scope, elm) {
             scope.add = function () {
-                console.log(elm);
-                elm.after($compile('<comix-manager></comix-manager>')(scope));
-                //scope.test();
+                angular.element("#pages").append($compile('<comix-manager></comix-manager>')(scope));
+                //scope.drgbl();
             }
         }
     };
-});
+    });
+
+
 
 //app.directive('drgbl', function($timeout) {
 //    return {
