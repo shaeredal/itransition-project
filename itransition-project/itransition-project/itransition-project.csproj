@@ -272,7 +272,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\app\balloons_styles.css" />
+<<<<<<< HEAD
     <Content Include="Content\blackBootstrap.css" />
+=======
+    <Content Include="Content\bootstrap-darkly.min.css" />
+    <Content Include="Content\bootstrap-flatly.min.css" />
+>>>>>>> a3fe7130e0e1b46a91c9407bb5f3ce38837c3403
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\DragAndDrop.css" />

@@ -7,19 +7,28 @@
 <h2>AddComix</h2>
 
 <div class="container" ng-app="ComixAdd">
-    <div ng-controller="pagesController">
-        <button ng-click="add()">Add Page</button>
+    <div id="pages" ng-controller="pagesController">
+        <button ng-click="add()" class="btn btn-default btn-sm">Add Page</button>
+        <button ng-click="drgbl()" class="btn btn-default btn-sm">Run</button>
         <comix-manager></comix-manager>
+    </div>
+    <div id="balloons_panel">
+        <div class="talkbubble">
+            <a class="delete-cross"></a>
+            <p>
+                <textarea>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tristique diam vel libero lobortis, in faucibus elit vulputate. Maecenas lacinia, sapien sit amet auctor pulvinar, nisl leo tincidunt nibh</textarea>
+            </p>
+        </div>
     </div>
 </div>
 
-<div id="balloons_panel">
-    <p class="speech">test</p>
-</div>
+
 
 
 @section scripts{
+    
     @Scripts.Render("~/bundles/template")
     @Scripts.Render("~/bundles/AddComix")
+    @Scripts.Render("~/bundles/jqueryui")
 }
 
