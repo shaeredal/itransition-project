@@ -1,6 +1,9 @@
 ﻿@using Microsoft.AspNet.Identity
 @model itransition_project.Models.UserInfoViewModel
-
+@if (User.IsInRole("admin"))
+{
+    @Html.ActionLink("Edit Details", "EditDetails", "Admin", new { id = @Model.Profile.UserName }, null)
+}
 <h2>@Model.Profile.UserName</h2>
 <div class="col-md-3">
     <div class="panel-default">
@@ -15,42 +18,49 @@
         </div>
     </div>
     <h3>Medal</h3>
-@foreach (var item in Model.Medals)
-{
-    <img src="@item.Image" title="@item.Name" width="50" height="50"/>
-}
-    
-    @using (Html.BeginForm("UserInfo", "User", FormMethod.Post))
+    @foreach (var item in Model.Medals)
     {
-        @Html.LabelFor(model => model.Comments.First().Text, "Comments")
-        <br />  
-        <textarea class="form-control" rows="3" type="text" name="text" id="text" placeholder="Text input"></textarea>
-        @Html.Hidden("userId", Model.Profile.Profile.User.Id)
-        <input type="submit" class="btn btn-default" value="Add" />
+        <img src="@item.Image" title="@item.Name" width="50" height="50"/>
     }
+    @if (User.Identity.IsAuthenticated)
+    {
+        using (Html.BeginForm("UserInfo", "User", FormMethod.Post))
+        {
+            @Html.LabelFor(model => model.Comments.First().Text, "Comments")
+            <br />
+            <textarea class="form-control" rows="3" type="text" name="text" id="text" placeholder="Text input"></textarea>
+            @Html.Hidden("userId", Model.Profile.Profile.User.Id)
+            <input type="submit" class="btn btn-default" value="Add" />
+        }
+    }
+    
     <div ng-app="">
-            @foreach (var item in Model.Comments)
-            {
-                <div class="row" >
-                    <div class="col-xs-4">
-                    <a href="../../User/UserInfo/@item.Author.UserName"><img ng-src="@item.Author.Profile.Photo" class="img-circle img-responsive"  width="150" height="150"></a><span>@item.Author.UserName</span>
-                    </div>
-                    <div class="col-xs-8">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                @item.Text<br>
-                                @if (item.Author.UserName == User.Identity.GetUserName())
+        @foreach (var item in Model.Comments)
+        {
+            <div class="row">
+                <div class="col-xs-4">
+                    <a href="../../User/UserInfo/@item.Author.UserName"><img ng-src="@item.Author.Profile.Photo" class="img-circle img-responsive" width="150" height="150"></a><span>@item.Author.UserName</span>
+                </div>
+                <div class="col-xs-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            @item.Text<br>
+                            <div class="pull-right">
+                                @if (item.Author.UserName == User.Identity.GetUserName() || User.IsInRole("admin"))
                                 {
-                                    <input type="submit" class="btn-sm" value="del" />
+                                    <button type="button" class="btn btn-xs btn-default" onclick="DelComment(@item.Id)"><span class="glyphicon glyphicon-remove"></span></button>
                                 }
-                                
-                                <span class="label label-info">@item.Time</span>
-                                <div class="pull-right">
-                                </div>
+                            </div>
+
+                            
+
+                            <span class="label label-info">@item.Time</span>
+                            <div class="pull-right">
                             </div>
                         </div>
                     </div>
-               </div>
-            }
-        </div>
+                </div>
+            </div>
+        }
     </div>
+</div>

@@ -223,6 +223,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Cloud\ImageUploader.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ComixController.cs" />
@@ -276,6 +277,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\DragAndDrop.css" />
+    <Content Include="Content\loading_spinner.gif" />
     <Content Include="Content\TemplateStyles\skew_style.css" />
     <Content Include="Content\TemplateStyles\triad_style.css" />
     <Content Include="Content\TemplateStyles\tetrad_style.css" />
@@ -346,6 +348,8 @@
     <Content Include="Scripts\angular-touch.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\app\AdminDragDrop.js" />
+    <Content Include="Scripts\app\UserInfo.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -1124,7 +1128,10 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\app\templates_script.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Admin\EditDetails.cshtml" />
     <Content Include="Views\Comix\ComixPage.cshtml" />
+    <Content Include="Views\Admin\AllUsers.cshtml" />
+    <Content Include="Views\Admin\_Users.cshtml" />
     <None Include="Views\Templates\Triad.cshtml" />
     <None Include="Views\Templates\Tetrad.cshtml" />
     <Content Include="Web.config" />

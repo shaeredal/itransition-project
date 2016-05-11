@@ -17,6 +17,8 @@ namespace itransition_project
                 "~/Scripts/angular.min.js"));
             bundles.Add(new ScriptBundle("~/bundles/DragAndDrop").Include(
                 "~/Scripts/DragAndDrop.js"));
+            bundles.Add(new ScriptBundle("~/bundles/AdminDragDrop").Include(
+                "~/Scripts/app/AdminDragDrop.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
@@ -37,6 +39,9 @@ namespace itransition_project
 
             bundles.Add(new ScriptBundle("~/bundles/AddComix").Include(
                         "~/Scripts/app/AddComix.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/UserInfo").Include(
+                        "~/Scripts/app/UserInfo.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
