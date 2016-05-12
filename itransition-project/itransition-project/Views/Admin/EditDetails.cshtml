@@ -10,8 +10,9 @@
     <fieldset>
         @Html.HiddenFor(m => m.Id)
         <p>
-            <br />
-            <input type="text" class="form-control" placeholder="Text input"name="about" id="about">
+            <br/>
+
+            <input type="text" class="form-control" placeholder="Text input" name="about" id="about">
             @Html.Hidden("id", Model.Id)
         </p>
         <p><input type="submit" value="Отправить" /></p>

@@ -272,12 +272,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\app\balloons_styles.css" />
-<<<<<<< HEAD
     <Content Include="Content\blackBootstrap.css" />
-=======
     <Content Include="Content\bootstrap-darkly.min.css" />
     <Content Include="Content\bootstrap-flatly.min.css" />
->>>>>>> a3fe7130e0e1b46a91c9407bb5f3ce38837c3403
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\DragAndDrop.css" />
@@ -1189,10 +1186,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_GlobalResources\Resource.resx">
+    <EmbeddedResource Include="App_GlobalResources\Resource.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
-    </Content>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604271709309_InitialCreate.resx">
       <DependentUpon>201604271709309_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
