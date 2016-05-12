@@ -5,7 +5,7 @@
     <select ng-model="selection" ng-options="item for item in items" class="dropdown-header"></select>
     <button ng-click="remove($event)" class="btn btn-default btn-sm">Remove</button>
     <hr/>
-    <div style="height:800px" ng-switch on="selection">
+    <div id="template_switch" style="height:800px" ng-switch on="selection">
         <div ng-view ng-switch-when="skew">
             @Html.Partial("~/Views/Templates/Skew.cshtml")
         </div>

@@ -272,7 +272,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\app\balloons_styles.css" />
+<<<<<<< HEAD
     <Content Include="Content\blackBootstrap.css" />
+=======
+>>>>>>> 4f1e4d02668fe06dd634bd9c9645c8088d937640
     <Content Include="Content\bootstrap-darkly.min.css" />
     <Content Include="Content\bootstrap-flatly.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -350,6 +353,7 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\AdminDragDrop.js" />
+    <Content Include="Scripts\app\JsonScripts.js" />
     <Content Include="Scripts\app\UserInfo.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
