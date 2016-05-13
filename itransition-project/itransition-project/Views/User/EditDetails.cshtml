@@ -11,9 +11,13 @@
         @Html.HiddenFor(m => m.Id)
         <p>
             @Html.LabelFor(m => m.About, "About")
-            <br />
+            <br/>
             @Html.EditorFor(m => m.About)
         </p>
+        <select class="form-control" name="Theme" id="Theme">
+            <option>Light</option>
+            <option>Dark</option>
+        </select>
         <p><input type="submit" value="Отправить" /></p>
     </fieldset>
 }
