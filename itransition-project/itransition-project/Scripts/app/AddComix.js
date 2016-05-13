@@ -89,54 +89,25 @@ app.controller('dragndrop', function ($scope) {
     }
 });
 
-
-
-app.controller("pagesController", function ($scope) {
+app.controller("pagesController", function ($scope, $http) {
     $scope.page = '/Comix/ComixPage';
-    $scope.drgbl = function () {
-        $(".frame-image").draggable({
-            //containment: "parent"
-        }).resizable();
-        $('.frame-image').bind('mousewheel', function (e) {
-            if (e.originalEvent.deltaY < 0) {
-                $(this).css("width", "+=16");
-                $(this).css("height", "+=16");
-            }
-            else {
-                $(this).css("width", "-=16");
-                $(this).css("height", "-=16");
-            }
-            return false;
-        });
-
-        $("#balloons_panel .talkbubble").draggable(
-            { helper: "clone" }).resizable({ containment: "parent" });
-
-        $(".frame-image").droppable({
-            accept: "#balloons_panel .talkbubble",
-            drop: function (event, ui) {
-                var clone = ui.draggable.clone();
-                clone.draggable({
-                    containment: "parent"
-                }).resizable({ containment: "parent" });
-                
-                clone.css("top", ui.offset.top - $(this).offset().top);
-                clone.css("left", ui.offset.left - $(this).offset().left);
-                clone.css("position", "absolute");
-
-                clone.find('.delete-cross').click(function () { clone.remove(); });
-
-                $(this).append(clone);
-            }
-        });
-    };
+    $scope.drgbl = make_it_draggable;
     $scope.$watch(function () {
         return angular.element;
     }, function () {
             $scope.$evalAsync(function () {
                 $scope.drgbl();
             });
-        });
+    });
+    $scope.save = function () {
+        var comix = $http.post('/Comix/ReceiveComix', getComix());
+        //res.success(function(data, status, headers, config) {
+        //    $scope.message = data;
+        //});
+        //res.error(function(data, status, headers, config) {
+        //    alert( "failure message: " + JSON.stringify({data: data}));
+        //});		
+    }
     }).directive("comixManager", function ($compile) {
     return {
         templateUrl: '/Comix/ComixPage',
@@ -161,3 +132,102 @@ app.controller("pagesController", function ($scope) {
 //        }
 //    }
 //});
+
+function getComix() {
+    var pages = [];
+    for(let page of $("#pages").children("comix-manager").toArray()) {
+        pages.push(getPage(page));
+    }
+    return { "pages": pages };
+}
+
+function getPage(page) {
+    var template = $(page).find("option[selected]").contents()[0].textContent;
+    //page.find("#comic_wrapper_" + template)
+    var frame_images = [];
+    for(let image of $(page).find(".frame-image").toArray()) {
+        frame_images.push(getImage(image));
+    }
+    return {
+        "template": template,
+        "frameimages": frame_images
+    }
+}
+
+function getImage(image) {
+    var bg = $(image).css("background-image");
+    var top = $(image).css("top");
+    var left = $(image).css("left");
+    var width = $(image).css("width");
+    var height = $(image).css("height");
+
+    var balloons = [];
+    for(let balloon of $(image).find(".talkbubble").toArray()) {
+        balloons.push(getBalloon(balloon));
+    }
+
+
+    return {
+        "backgroundimage": bg,
+        "top": top,
+        "left": left,
+        "width": width,
+        "height": height,
+        "balloons": balloons
+    }
+}
+
+function getBalloon(balloon) {
+    var text = $(balloon).find("textarea").val();
+    var top = $(balloon).css("top");
+    var left = $(balloon).css("left");
+    var width = $(balloon).css("width");
+    var height = $(balloon).css("height");
+
+    return {
+        "text": text,
+        "top": top,
+        "left": left,
+        "width": width,
+        "height": height
+    }
+}
+
+
+function make_it_draggable() {
+    $(".frame-image").draggable({
+        //containment: "parent"
+    }).resizable();
+    $('.frame-image').bind('mousewheel', function (e) {
+        if (e.originalEvent.deltaY < 0) {
+            $(this).css("width", "+=16");
+            $(this).css("height", "+=16");
+        }
+        else {
+            $(this).css("width", "-=16");
+            $(this).css("height", "-=16");
+        }
+        return false;
+    });
+
+    $("#balloons_panel .talkbubble").draggable(
+        { helper: "clone" }).resizable({ containment: "parent" });
+
+    $(".frame-image").droppable({
+        accept: "#balloons_panel .talkbubble",
+        drop: function (event, ui) {
+            var clone = ui.draggable.clone();
+            clone.draggable({
+                containment: "parent"
+            }).resizable({ containment: "parent" });
+                
+            clone.css("top", ui.offset.top - $(this).offset().top);
+            clone.css("left", ui.offset.left - $(this).offset().left);
+            clone.css("position", "absolute");
+
+            clone.find('.delete-cross').click(function () { clone.remove(); });
+
+            $(this).append(clone);
+        }
+    });
+};

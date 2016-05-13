@@ -60,14 +60,17 @@ namespace itransition_project.Models
     {
         public int Id { get; set; }
         public virtual Template Template { get; set; }
-        public virtual ICollection<Frame> Contents { get; set; }
+        public virtual ICollection<Frame> Frames { get; set; }
     }
 
     public class Frame
     {
         public int Id { get; set; }
-        public string Position { get; set; }
-        public string Address { get; set; }
+        public string BackgroundImage { get; set; }
+        public string Top { get; set; }
+        public string Left { get; set; }
+        public string Width { get; set; }
+        public string Height { get; set; }
         public virtual ICollection<Balloon> Balloons { get; set; }
     }
 
@@ -96,6 +99,10 @@ namespace itransition_project.Models
         public int Id { get; set; }
         public virtual BalloonType Type { get; set; }
         public string Text { get; set; }
+        public string Top { get; set; }
+        public string Left { get; set; }
+        public string Width { get; set; }
+        public string Height { get; set; }
     }
 
     public class BalloonType
