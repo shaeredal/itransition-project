@@ -15,6 +15,8 @@ namespace itransition_project.App_Start
             {
                 cfg.CreateMap<Comix, ComixViewModel>();
             });
+
+
         }
     }
 }

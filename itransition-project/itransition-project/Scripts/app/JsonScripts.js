@@ -34,7 +34,7 @@ function getImage(image) {
 
 
     return {
-        "background-image": bg,
+        "background_image": bg,
         "position": position,
         "top": top,
         "left": left,

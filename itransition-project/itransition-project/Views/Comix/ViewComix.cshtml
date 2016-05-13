@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Comix";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Comix</h2>
+
+<div class="container" ng-app="ComixAdd">
+    <div id="pages" ng-controller="pagesController">
+        <comix-manager></comix-manager>
+    </div>
+</div>
+
+
+@section scripts{
+
+    @Scripts.Render("~/bundles/template")
+    @Scripts.Render("~/bundles/AddComix")
+    @Scripts.Render("~/bundles/jqueryui")
+}
+

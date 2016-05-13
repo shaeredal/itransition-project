@@ -259,10 +259,15 @@
     <Compile Include="Migrations\201605041607259_medalsUpdate.Designer.cs">
       <DependentUpon>201605041607259_medalsUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605121819510_ComixData.cs" />
+    <Compile Include="Migrations\201605121819510_ComixData.Designer.cs">
+      <DependentUpon>201605121819510_ComixData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CommentViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\JsonComixViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ProjectModels.cs" />
     <Compile Include="Models\UserInfoViewModel.cs" />
@@ -1133,6 +1138,7 @@
     <Content Include="Views\Comix\ComixPage.cshtml" />
     <Content Include="Views\Admin\AllUsers.cshtml" />
     <Content Include="Views\Admin\_Users.cshtml" />
+    <Content Include="Views\Comix\ViewComix.cshtml" />
     <None Include="Views\Templates\Triad.cshtml" />
     <None Include="Views\Templates\Tetrad.cshtml" />
     <Content Include="Web.config" />
@@ -1210,6 +1216,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605041607259_medalsUpdate.resx">
       <DependentUpon>201605041607259_medalsUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605121819510_ComixData.resx">
+      <DependentUpon>201605121819510_ComixData.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
