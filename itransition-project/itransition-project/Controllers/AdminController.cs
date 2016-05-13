@@ -48,9 +48,7 @@ namespace itransition_project.Controllers
                 "da40pd4iw",
             "878111261769614",
             "d_UzO32EJIqhtFnshPcdgalOFeg");
-
             var cloudinary = new Cloudinary(account);
-
             var uploadParams = new ImageUploadParams
             {
                 File = new FileDescription(data)
@@ -81,7 +79,6 @@ namespace itransition_project.Controllers
             var dbContext = new ApplicationDbContext();
             var profiles = dbContext.Profiles;
             var itemsToSkip = page * pageSize;
-
             return profiles.OrderBy(t => t.Id).Skip(itemsToSkip).
                 Take(pageSize).ToList();
         }

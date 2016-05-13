@@ -4,6 +4,7 @@ using System.Web;
 using System.Web.Mvc;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
+using itransition_project.Filters;
 using itransition_project.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -15,6 +16,7 @@ namespace itransition_project.Controllers
         public static string UserPageId;
         // GET: User
         [HttpGet]
+        [Culture]
         public ActionResult UserInfo(string id)
         {
             ApplicationDbContext db = new ApplicationDbContext();
@@ -61,6 +63,7 @@ namespace itransition_project.Controllers
         }
 
         [HttpGet]
+        [Culture]
         public ActionResult EditDetails()
         {
             ApplicationUser appUser = System.Web.HttpContext.Current.GetOwinContext().
@@ -71,16 +74,27 @@ namespace itransition_project.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditDetails(Profile profile)
+        public ActionResult RefreshInfo(string id, string about, string theme, string lang)
         {
-            ApplicationUser appUser = System.Web.HttpContext.Current.GetOwinContext().
-                GetUserManager<ApplicationUserManager>().
-                FindById(System.Web.HttpContext.
-                Current.User.Identity.GetUserId());
-            appUser.Profile.About = profile.About;
-            System.Web.HttpContext.Current.GetOwinContext().
-                GetUserManager<ApplicationUserManager>().Update(appUser);
-            return RedirectToAction("UserInfo", "User");
+            var dbContext = new ApplicationDbContext();
+            ApplicationUser applicationUser = dbContext.Users.First(x => x.UserName == id);
+            applicationUser.Theme = theme;
+            applicationUser.Profile.About = about;
+            applicationUser.Language = lang; 
+            HttpCookie cookie = Request.Cookies["lang"];
+            if (cookie != null)
+                cookie.Value = lang;   // если куки уже установлено, то обновляем значение
+            else
+            {
+
+                cookie = new HttpCookie("lang");
+                cookie.HttpOnly = false;
+                cookie.Value = lang;
+                cookie.Expires = DateTime.Now.AddYears(1);
+            }
+            Response.Cookies.Add(cookie);
+            dbContext.SaveChanges();
+            return RedirectToAction("UserInfo", "User", id);
         }
 
         [HttpPost]

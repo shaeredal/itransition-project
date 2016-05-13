@@ -4,7 +4,7 @@
 {
     @Html.ActionLink("Edit Details", "EditDetails", "Admin", new { id = @Model.Profile.UserName }, null)
 }
-<h2>@Model.Profile.UserName</h2>
+<h2 id="UserName">@Model.Profile.UserName</h2>
 <div class="col-md-3">
     <div class="panel-default">
         <div class="panel-heading text-center">
@@ -27,13 +27,13 @@
         using (Html.BeginForm("UserInfo", "User", FormMethod.Post))
         {
             @Html.LabelFor(model => model.Comments.First().Text, "Comments")
-            <br />
             <textarea class="form-control" rows="3" type="text" name="text" id="text" placeholder="Text input"></textarea>
             @Html.Hidden("userId", Model.Profile.Profile.User.Id)
+            <br />
             <input type="submit" class="btn btn-default" value="Add" />
         }
     }
-    
+    <br />
     <div ng-app="">
         @foreach (var item in Model.Comments)
         {

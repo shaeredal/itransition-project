@@ -4,23 +4,23 @@
     ViewBag.Title = "EditDetails";
 }
 
-<h2>@Model.User.Profile.User.UserName</h2>
-@using (Html.BeginForm("EditDetails", "User", FormMethod.Post))
-{
-    <fieldset>
-        @Html.HiddenFor(m => m.Id)
+<h2 id ="UserName">@Model.User.Profile.User.UserName</h2>
         <p>
-            @Html.LabelFor(m => m.About, "About")
-            <br/>
-            @Html.EditorFor(m => m.About)
+            <input type="text" class="form-control" placeholder="Text input" value="@Model.About" name="about" id="about">
         </p>
-        <select class="form-control" name="Theme" id="Theme">
-            <option>Light</option>
-            <option>Dark</option>
-        </select>
-        <p><input type="submit" value="Отправить" /></p>
-    </fieldset>
-}
+<p>
+    <select class="form-control" name="Theme" id="Theme">
+        <option>Light</option>
+        <option>Dark</option>
+    </select>
+</p>
+<p>
+    <select class="form-control" name="Lang" id="Lang">
+        <option>en</option>
+        <option>ru</option>
+    </select>
+</p>
+        <p><button onclick="refreshInfo()" type="button" class="btn btn-primary">Refresh</button></p>
 
 <div id="userActions">
 <p>Drag &amp; Drop Image</p>
@@ -36,3 +36,36 @@
 @Styles.Render("~/Content/DragAndDrop")
 
         }
+<script>
+    function getUserName() {
+        var id = document.getElementById("UserName").textContent;
+        return id;
+    }
+
+    function getUserAbout() {
+        var about = document.getElementById("about").value;
+        return about;
+    }
+
+    function getUserTheme() {
+        var theme = document.getElementById("Theme").options[document.getElementById("Theme").selectedIndex].value;
+        return theme;
+    }
+
+    function getUserLang() {
+        var theme = document.getElementById("Lang").options[document.getElementById("Lang").selectedIndex].value;
+        return theme;
+    }
+
+    function refreshInfo() {
+
+        jQuery.ajax({
+            type: "POST",
+            url: "/User/RefreshInfo",
+            data: JSON.stringify({ id: getUserName(), about: getUserAbout(), theme: getUserTheme(), lang: getUserLang() }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            succses: window.location.href = "/User/UserInfo/" + getUserName()
+        });
+    }
+</script>

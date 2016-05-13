@@ -5,6 +5,12 @@
             url: "/User/DelComment",
             data: JSON.stringify({ data: id }),
             contentType: "application/json; charset=utf-8",
-            dataType: "json"
+            dataType: "json",
+            succses: window.location.href = "/User/UserInfo/" + getUserName()
+
         });
-    }
+}
+function getUserName() {
+    var id = document.getElementById("UserName").textContent;
+    return id;
+}

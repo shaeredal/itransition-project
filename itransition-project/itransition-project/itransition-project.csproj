@@ -210,11 +210,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_GlobalResources\Resource.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resource.resx</DependentUpon>
-    </Compile>
     <Compile Include="App_Start\AutoMapperConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -228,6 +223,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ComixController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Filters\CultureAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -268,14 +264,16 @@
     <Compile Include="Models\UserInfoViewModel.cs" />
     <Compile Include="Models\ViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\app\balloons_styles.css" />
-<<<<<<< HEAD
     <Content Include="Content\blackBootstrap.css" />
-=======
->>>>>>> 4f1e4d02668fe06dd634bd9c9645c8088d937640
     <Content Include="Content\bootstrap-darkly.min.css" />
     <Content Include="Content\bootstrap-flatly.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -353,6 +351,7 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\AdminDragDrop.js" />
+    <Content Include="Scripts\app\EditDetails.js" />
     <Content Include="Scripts\app\JsonScripts.js" />
     <Content Include="Scripts\app\UserInfo.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1190,10 +1189,6 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="App_GlobalResources\Resource.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604271709309_InitialCreate.resx">
       <DependentUpon>201604271709309_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
@@ -1214,6 +1209,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605041607259_medalsUpdate.resx">
       <DependentUpon>201605041607259_medalsUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Resource.en.resx" />
+    <EmbeddedResource Include="Resources\Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

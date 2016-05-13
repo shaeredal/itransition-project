@@ -15,17 +15,16 @@
                 }
             
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello @User.Identity.GetUserName()<span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@Resources.Resource.Hello @User.Identity.GetUserName()<span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li>@Html.ActionLink("Profile", "UserInfo", "User", new {id = User.Identity.GetUserName()}, null)</li>
-                    <li>@Html.ActionLink("Edit Details", "EditDetails", "User")</li>
-                    <li        @Html.ActionLink("Hello " + User.Identity.GetUserName()
-                              + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })></li>
+                    <li>@Html.ActionLink(@Resources.Resource.Profile, "UserInfo", "User", new {id = User.Identity.GetUserName()}, null)</li>
+                    <li>@Html.ActionLink(@Resources.Resource.EditDetails, "EditDetails", "User")</li>
+                    <li> @Html.ActionLink(@Resources.Resource.Manage, "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</li>
                 </ul>
             </li>
         
         @*@Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })*@
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">@Resources.Resource.LogOff </a></li>
         </ul>
     }
 }
