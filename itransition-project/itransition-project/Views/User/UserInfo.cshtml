@@ -1,5 +1,8 @@
 ﻿@using Microsoft.AspNet.Identity
 @model itransition_project.Models.UserInfoViewModel
+@{ 
+    ViewBag.Title = Model.Profile.UserName;
+}
 @if (User.IsInRole("admin"))
 {
     @Html.ActionLink("Edit Details", "EditDetails", "Admin", new { id = @Model.Profile.UserName }, null)

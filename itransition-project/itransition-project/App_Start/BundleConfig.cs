@@ -40,6 +40,9 @@ namespace itransition_project
             bundles.Add(new ScriptBundle("~/bundles/AddComix").Include(
                         "~/Scripts/app/AddComix.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/ViewComix").Include(
+                        "~/Scripts/app/ViewComix.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/UserInfo").Include(
                         "~/Scripts/app/UserInfo.js"));
 

@@ -101,12 +101,12 @@ app.controller("pagesController", function ($scope, $http) {
     });
     $scope.save = function () {
         var comix = $http.post('/Comix/ReceiveComix', getComix());
-        //res.success(function(data, status, headers, config) {
-        //    $scope.message = data;
-        //});
-        //res.error(function(data, status, headers, config) {
-        //    alert( "failure message: " + JSON.stringify({data: data}));
-        //});		
+        comix.success(function(data, status, headers, config) {
+            window.location.href = data;
+        });
+        comix.error(function(data, status, headers, config) {
+            alert( "failure message: " + JSON.stringify({data: data}));
+        });		
     }
     }).directive("comixManager", function ($compile) {
     return {
@@ -142,7 +142,7 @@ function getComix() {
 }
 
 function getPage(page) {
-    var template = $(page).find("option[selected]").contents()[0].textContent;
+    var template = $(page).find("[ng-switch-when]").attr("ng-switch-when");
     //page.find("#comic_wrapper_" + template)
     var frame_images = [];
     for(let image of $(page).find(".frame-image").toArray()) {
@@ -155,7 +155,7 @@ function getPage(page) {
 }
 
 function getImage(image) {
-    var bg = $(image).css("background-image");
+    var bg = $(image).css("background-image").replace('url(\"', '').replace('\")', '');
     var top = $(image).css("top");
     var left = $(image).css("left");
     var width = $(image).css("width");
@@ -219,7 +219,10 @@ function make_it_draggable() {
             var clone = ui.draggable.clone();
             clone.draggable({
                 containment: "parent"
-            }).resizable({ containment: "parent" });
+            });
+
+            clone.attr("class", "talkbubble");
+            clone.find(".ui-resizable-handle").remove();
                 
             clone.css("top", ui.offset.top - $(this).offset().top);
             clone.css("left", ui.offset.left - $(this).offset().left);

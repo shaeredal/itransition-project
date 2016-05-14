@@ -14,4 +14,10 @@ namespace itransition_project.Models
         public AgeRating AgeRating { get; set; }
         public ApplicationUser Author { get; set; }
     }
+
+    public class AuthorViewModel
+    {
+        public string Id { get; set; }
+        public string UserName { get; set; }
+    }
 }

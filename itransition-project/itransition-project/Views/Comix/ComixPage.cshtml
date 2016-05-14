@@ -3,6 +3,7 @@
 }
 <dragable ng-controller="switchTemplateController">
     <select ng-model="selection" ng-options="item for item in items" class="dropdown-header"></select>
+    <br />
     <button ng-click="remove($event)" class="btn btn-default btn-sm">Remove</button>
     <hr/>
     <div id="template_switch" style="height:800px" ng-switch on="selection">

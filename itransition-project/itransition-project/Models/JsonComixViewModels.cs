@@ -6,6 +6,13 @@ using System.Web;
 namespace itransition_project.Models
 {
     [Serializable]
+    public class JsonReturnComixViewModel
+    {
+        public AuthorViewModel Author { get; set; }
+        public List<JsonPagesViewModel> Pages { get; set; }
+    }
+
+    [Serializable]
     public class JsonComixViewModel
     {
         public List<JsonPagesViewModel> Pages { get; set; }

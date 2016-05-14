@@ -1,4 +1,4 @@
-﻿
+﻿@model itransition_project.Models.JsonReturnComixViewModel
 @{
     ViewBag.Title = "Comix";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,17 +6,28 @@
 
 <h2>Comix</h2>
 
-<div class="container" ng-app="ComixAdd">
-    <div id="pages" ng-controller="pagesController">
-        <comix-manager></comix-manager>
+<div class="container">
+    <div id="pages">
+        @foreach (var page in Model.Pages)
+        {
+            switch (page.Template)
+            {
+                case "skew":
+                    @Html.Partial("~/Views/Templates/SkewView.cshtml", page)
+                    break;
+                case "triad":
+                    @Html.Partial("~/Views/Templates/TriadView.cshtml", page)
+                    break;
+                case "tetrad":
+                    @Html.Partial("~/Views/Templates/TetradView.cshtml", page)
+                    break;
+            }
+        }
     </div>
 </div>
 
 
-@section scripts{
-
-    @Scripts.Render("~/bundles/template")
-    @Scripts.Render("~/bundles/AddComix")
-    @Scripts.Render("~/bundles/jqueryui")
-}
+@*@section scripts{
+            @Scripts.Render("~/bundles/ViewComix")
+}*@
 
