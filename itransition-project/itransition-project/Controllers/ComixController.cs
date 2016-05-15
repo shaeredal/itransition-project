@@ -271,6 +271,9 @@ namespace itransition_project.Controllers
             }
             comix.Ratings.Add(new Rating {Condition = isPositive, User = user});
             var c = db.Comixes.First(x => x.Id == comix.Id);
+            var edb = db.Comixes.First(x => x.Id == Id);
+            int rating = edb.Ratings.Sum(userRate => userRate.Condition ? 1 : -1);
+            c.RatingValue = rating;
             c = comix;
             db.SaveChanges();
             return null;
