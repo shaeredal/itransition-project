@@ -222,11 +222,13 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ComixController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\CultureAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Lucene\LuceneEntryModel.cs" />
     <Compile Include="Migrations\201604271709309_InitialCreate.cs" />
     <Compile Include="Migrations\201604271709309_InitialCreate.Designer.cs">
       <DependentUpon>201604271709309_InitialCreate.cs</DependentUpon>
@@ -1142,6 +1144,7 @@
     <Content Include="Views\Admin\AllUsers.cshtml" />
     <Content Include="Views\Admin\_Users.cshtml" />
     <Content Include="Views\Comix\ViewComix.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
     <None Include="Views\Templates\Triad.cshtml" />
     <None Include="Views\Templates\Tetrad.cshtml" />
     <Content Include="Web.config" />
@@ -1185,6 +1188,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="LuceneEntryIndex\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -1216,16 +1220,14 @@
     <EmbeddedResource Include="Migrations\201605041607259_medalsUpdate.resx">
       <DependentUpon>201605041607259_medalsUpdate.cs</DependentUpon>
     </EmbeddedResource>
-<<<<<<< HEAD
     <EmbeddedResource Include="Resources\Resource.en.resx" />
     <EmbeddedResource Include="Resources\Resource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Resources</CustomToolNamespace>
-=======
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605121819510_ComixData.resx">
       <DependentUpon>201605121819510_ComixData.cs</DependentUpon>
->>>>>>> d92311afb9c4c02fb853ce219a70e116d18b72ff
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

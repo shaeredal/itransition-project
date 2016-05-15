@@ -14,7 +14,7 @@ namespace itransition_project.Controllers
 
     public class AdminController : Controller
     {
-        const int pageSize = 3;
+        const int pageSize = 12;
 
         [HttpGet]
         [Authorize(Roles = "admin")]
@@ -81,6 +81,29 @@ namespace itransition_project.Controllers
             var itemsToSkip = page * pageSize;
             return profiles.OrderBy(t => t.Id).Skip(itemsToSkip).
                 Take(pageSize).ToList();
+        }
+
+        [HttpPost]
+        public ActionResult RefreshInfo(string id, string about, string theme, string lang)
+        {
+            var dbContext = new ApplicationDbContext();
+            ApplicationUser applicationUser = dbContext.Users.First(x => x.UserName == id);
+            applicationUser.Theme = theme;
+            applicationUser.Profile.About = about;
+            applicationUser.Language = lang;
+            HttpCookie cookie = Request.Cookies["lang"];
+            if (cookie != null)
+                cookie.Value = lang;   // если куки уже установлено, то обновляем значение
+            else
+            {
+                cookie = new HttpCookie("lang");
+                cookie.HttpOnly = false;
+                cookie.Value = lang;
+                cookie.Expires = DateTime.Now.AddYears(1);
+            }
+            Response.Cookies.Add(cookie);
+            dbContext.SaveChanges();
+            return RedirectToAction("UserInfo", "User", id);
         }
     }
 }

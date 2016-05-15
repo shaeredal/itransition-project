@@ -7,7 +7,7 @@
 
         <ul class="nav navbar-nav navbar-right">
             <li>
-
+                @Html.ActionLink(@Resources.Resource.CreateComix, "AddComix", "Comix", routeValues: null, htmlAttributes: new { @class = "btn btn-success" })
             <li>
                 @if (User.IsInRole("admin"))
                 {
