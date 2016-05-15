@@ -265,6 +265,10 @@
     <Compile Include="Migrations\201605150135486_comixDatetime.Designer.cs">
       <DependentUpon>201605150135486_comixDatetime.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605151415002_rating add.cs" />
+    <Compile Include="Migrations\201605151415002_rating add.Designer.cs">
+      <DependentUpon>201605151415002_rating add.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CommentViewModel.cs" />
@@ -364,6 +368,7 @@
     <Content Include="Scripts\app\AdminDragDrop.js" />
     <Content Include="Scripts\app\EditDetails.js" />
     <Content Include="Scripts\app\JsonScripts.js" />
+    <Content Include="Scripts\app\LikeAndDislike.js" />
     <Content Include="Scripts\app\UserInfo.js" />
     <Content Include="Scripts\app\ViewComix.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1231,6 +1236,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605150135486_comixDatetime.resx">
       <DependentUpon>201605150135486_comixDatetime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605151415002_rating add.resx">
+      <DependentUpon>201605151415002_rating add.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Resource.en.resx" />
     <EmbeddedResource Include="Resources\Resource.resx">

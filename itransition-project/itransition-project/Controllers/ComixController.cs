@@ -144,6 +144,7 @@ namespace itransition_project.Controllers
 
             JsonReturnComixViewModel comixViewModel = new JsonReturnComixViewModel
             {
+                Id = comix.Id,
                 Author = author,
                 CreationTime = comix.CreationTime,
                 Name = comix.Name,
@@ -188,6 +189,71 @@ namespace itransition_project.Controllers
                 comixViewModel.Pages.Add(p);
             }
             return comixViewModel;
+        }
+
+        [HttpPost]
+        public ActionResult GetRate(int Id)
+        {
+            var db = new ApplicationDbContext();
+            var edb = db.Comixes.First(x => x.Id == Id);
+            int rating = edb.Ratings.Sum(userRate => userRate.Condition ? 1 : -1);
+            return Json(rating, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult GetUserRate(int Id)
+        {
+            var db = new ApplicationDbContext();
+            if (User.Identity.IsAuthenticated)
+            {
+                var comix = db.Comixes.First(x => x.Id == Id);
+                var currentUserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
+                var user = db.Users.First(x => x.Id == currentUserId);
+                var userRate = comix.Ratings.FirstOrDefault(x => x.User.Id == user.Id);
+                return Json(userRate?.Condition, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(null, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public ActionResult AddRate(int Id, bool isPositive)
+        {
+            var db = new ApplicationDbContext();
+            var comix = db.Comixes.First(x => x.Id == Id);
+            var currentUserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            var user = db.Users.First(x => x.Id == currentUserId);
+
+            foreach (var userRate in comix.Ratings)
+            {
+                if (userRate.User.Id == user.Id)
+                {
+                    if (userRate.Condition != isPositive)
+                    {
+                        userRate.Condition = !userRate.Condition;
+                        var a = db.Comixes.First(x => x.Id == comix.Id);
+                        a = comix;
+                        db.SaveChanges();
+                        return null;
+                    }
+                    else
+                    {
+                        comix.Ratings.Remove(userRate);
+                        db.Ratings.Remove(userRate);
+                        db.SaveChanges();
+                        var b = db.Comixes.First(x => x.Id == comix.Id);
+                        b = comix;
+                        db.SaveChanges();
+                        return null;
+                    }
+                }
+            }
+            comix.Ratings.Add(new Rating { Condition = isPositive, User = user });
+            var c = db.Comixes.First(x => x.Id == comix.Id);
+            c = comix;
+            db.SaveChanges();
+            return null;
         }
     }
 }

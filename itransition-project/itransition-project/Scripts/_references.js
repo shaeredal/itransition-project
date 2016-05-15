@@ -19,6 +19,7 @@
 /// <reference path="app/admindragdrop.js" />
 /// <reference path="app/editdetails.js" />
 /// <reference path="app/jsonscripts.js" />
+/// <reference path="app/likeanddislike.js" />
 /// <reference path="app/templates_script.js" />
 /// <reference path="app/userinfo.js" />
 /// <reference path="app/viewcomix.js" />

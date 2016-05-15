@@ -19,7 +19,6 @@ namespace itransition_project.Models
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Medal> Medals { get; set; }
         public virtual ICollection<Comix> Comixes { get; set; }
-        public virtual ICollection<Rating> Ratings { get; set; }
     }
 
     public class Comment
@@ -42,6 +41,7 @@ namespace itransition_project.Models
     public class Rating
     {
         public int Id { get; set; }
+        public virtual ApplicationUser User { get; set; }
         public bool Condition { get; set; }
     }
 
@@ -52,7 +52,8 @@ namespace itransition_project.Models
         public DateTime CreationTime { get; set; }
         public virtual ICollection<Page> Pages { get; set; }
         public virtual ICollection<Tag> Tags { get; set; }
-        public virtual Rating Rating { get; set; }
+        public virtual ICollection<Rating> Ratings { get; set; }
+        public virtual int RatingValue { get; set; }
         public virtual AgeRating AgeRating { get; set; }
         public virtual ApplicationUser Author { get; set; }
     }

@@ -8,6 +8,7 @@ namespace itransition_project.Models
     [Serializable]
     public class JsonReturnComixViewModel
     {
+        public int Id { get; set; }
         public AuthorViewModel Author { get; set; }
         public DateTime CreationTime { get; set; }
         public string Name { get; set; }
