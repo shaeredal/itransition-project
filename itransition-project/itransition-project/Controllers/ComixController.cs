@@ -7,6 +7,9 @@ using itransition_project.Models;
 using Microsoft.AspNet.Identity.Owin;
 using AutoMapper;
 using Microsoft.AspNet.Identity;
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
+using itransition_project.Lucene;
 
 namespace itransition_project.Controllers
 {
@@ -22,19 +25,20 @@ namespace itransition_project.Controllers
             return View(comixModel);
         }
 
+        [Authorize]
         public ActionResult AddComix()
         {
             return View();
         }
-        
+
         public ActionResult ComixPage()
         {
             return View();
         }
 
-        public ActionResult ViewComix()
+        public ActionResult ViewComix(int id)
         {
-            return View();
+            return View(MakeModel(id));
         }
 
         public ActionResult EditComix()
@@ -42,16 +46,19 @@ namespace itransition_project.Controllers
             return View();
         }
 
-        public void ReceiveComix(JsonComixViewModel comix)
+        public ActionResult ReceiveComix(JsonComixViewModel comix)
         {
             var db = new ApplicationDbContext();
 
             var currentUserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
             var currentAppUser = db.Users.First(x => x.Id == currentUserId);
 
-            Comix c = new Comix() { 
+            Comix c = new Comix() {
+                Author = currentAppUser,
+                CreationTime = DateTime.Now,
+                Name = comix.Name,
                 Pages = new List<Page>()
-            }; //TODO: add author, ratings and other
+            };
 
             foreach (var page in comix.Pages)
             {
@@ -61,11 +68,32 @@ namespace itransition_project.Controllers
                     Frames = new List<Frame>()
                 };
 
-                foreach(var image in page.FrameImages)
+                foreach (var image in page.FrameImages)
                 {
+                    var account = new Account(
+                    "da40pd4iw",
+                    "878111261769614",
+                    "d_UzO32EJIqhtFnshPcdgalOFeg");
+
+                    var cloudinary = new Cloudinary(account);
+
+                    string bg = image.BackgroundImage;
+
+                    if (bg.Substring(0, 4) == "data")
+                    { 
+                        var uploadParams = new ImageUploadParams
+                        {
+                            File = new FileDescription(bg)
+                        };
+
+                        var uploadResult = cloudinary.Upload(uploadParams);
+
+                        bg = "url(\"" + uploadResult.SecureUri.ToString() + "\")";
+                    }
+
                     Frame f = new Frame()
                     {
-                        BackgroundImage = image.BackgroundImage, //TODO: download to cloudinary and set link
+                        BackgroundImage = bg,
                         Top = image.Top,
                         Left = image.Left,
                         Width = image.Width,
@@ -73,7 +101,8 @@ namespace itransition_project.Controllers
                         Balloons = new List<Balloon>()
                     };
 
-                    foreach(var balloon in image.Balloons)
+                    if (image.Balloons != null)
+                    foreach (var balloon in image.Balloons)
                     {
                         Balloon b = new Balloon()
                         {
@@ -84,21 +113,81 @@ namespace itransition_project.Controllers
                             Height = balloon.Height
                         };
                         f.Balloons.Add(b);
-                        //db.Balloons.Add(b);
                     }
-
                     p.Frames.Add(f);
-                    //db.Frames.Add(f);
                 }
                 c.Pages.Add(p);
-                //db.Pages.Add(p);
             }
 
-            //db.Comixes.Add(c);
-
             currentAppUser.Profile.Comixes.Add(c);
-
             db.SaveChanges();
+            LuceneEntryModel.AddUpdateLuceneIndex(currentAppUser.Profile.Comixes.Last());
+            return Json(Url.Action("UserInfo", "User", new { id = User.Identity.GetUserName() }));
+        }
+
+
+        public JsonResult SendComix(int id)
+        {
+            return Json(MakeModel(id), JsonRequestBehavior.AllowGet);
+        }
+
+        private JsonReturnComixViewModel MakeModel(int id)
+        {
+            var db = new ApplicationDbContext();
+            var comix = db.Comixes.First(x => x.Id == id);
+
+            AuthorViewModel author = new AuthorViewModel()
+            {
+                Id = comix.Author.Id,
+                UserName = comix.Author.UserName
+            };
+
+            JsonReturnComixViewModel comixViewModel = new JsonReturnComixViewModel
+            {
+                Author = author,
+                CreationTime = comix.CreationTime,
+                Name = comix.Name,
+                Pages = new List<JsonPagesViewModel>()
+            };
+
+            foreach (var page in comix.Pages)
+            {
+                var p = new JsonPagesViewModel()
+                {
+                    Template = page.Template.Type,
+                    FrameImages = new List<JsonFrameImageViewModel>()
+                };
+
+                foreach (var frame in page.Frames)
+                {
+                    var f = new JsonFrameImageViewModel()
+                    {
+                        BackgroundImage = frame.BackgroundImage,
+                        Top = frame.Top,
+                        Left = frame.Left,
+                        Width = frame.Width,
+                        Height = frame.Height,
+                        Balloons = new List<JsonBalloonsViewModel>()
+                    };
+
+                    if (frame.Balloons != null)
+                        foreach (var balloon in frame.Balloons)
+                        {
+                            var b = new JsonBalloonsViewModel()
+                            {
+                                Text = balloon.Text,
+                                Top = balloon.Top,
+                                Left = balloon.Left,
+                                Width = balloon.Width,
+                                Height = balloon.Height
+                            };
+                            f.Balloons.Add(b);
+                        }
+                    p.FrameImages.Add(f);
+                }
+                comixViewModel.Pages.Add(p);
+            }
+            return comixViewModel;
         }
     }
 }

@@ -42,13 +42,13 @@ namespace itransition_project.Lucene
             // add lucene fields mapped to db fields
             doc.Add(new Field("Id", entry.Id.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
             doc.Add(new Field("Name", entry.Name, Field.Store.YES, Field.Index.ANALYZED));
-            doc.Add(new Field("AgeRating", entry.AgeRating.Type, Field.Store.YES, Field.Index.ANALYZED));
-            string tags = "";
-            foreach (var tag in entry.Tags)
-            {
-                tags += tag.Text + " ";
-            }
-            doc.Add(new Field("Tags", tags, Field.Store.YES, Field.Index.ANALYZED));
+            //doc.Add(new Field("AgeRating", entry.AgeRating.Type, Field.Store.YES, Field.Index.ANALYZED));
+            //string tags = "";
+            //foreach (var tag in entry.Tags)
+            //{
+            //    tags += tag.Text + " ";
+            //}
+            //doc.Add(new Field("Tags", tags, Field.Store.YES, Field.Index.ANALYZED));
 
             // add entry to index
             writer.AddDocument(doc);
@@ -171,7 +171,7 @@ namespace itransition_project.Lucene
                 else
                 {
                     var parser = new MultiFieldQueryParser
-                        (Version.LUCENE_30, new[] { "Id", "Text", "Title", "Content", "Description", "Comments", "Tags" }, analyzer);
+                        (Version.LUCENE_30, new[] { "Id", "Name", "Title", "Content", "Description", "Comments", "Tags" }, analyzer);
                     var query = parseQuery(searchQuery, parser);
                     var hits = searcher.Search
                     (query, null, hits_limit, Sort.RELEVANCE).ScoreDocs;

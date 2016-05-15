@@ -21,6 +21,7 @@
 /// <reference path="app/jsonscripts.js" />
 /// <reference path="app/templates_script.js" />
 /// <reference path="app/userinfo.js" />
+/// <reference path="app/viewcomix.js" />
 /// <reference path="bootstrap.js" />
 /// <reference path="draganddrop.js" />
 /// <reference path="jquery.validate.js" />

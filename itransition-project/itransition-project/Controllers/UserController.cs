@@ -28,7 +28,8 @@ namespace itransition_project.Controllers
                 {
                     Comments = db.Comments.Where(o => o.Profile.User.UserName == id).OrderByDescending(x => x.Time).ToList(),
                     Profile = db.Users.First(o => o.UserName == id),
-                    Medals = db.Medals.Where(o => o.Profile.User.UserName == id).ToList()
+                    Medals = db.Medals.Where(o => o.Profile.User.UserName == id).ToList(),
+                    Comixes = db.Comixes.Where(o => o.Author.UserName == id).ToList()
                 };
                 return View(model);
             }

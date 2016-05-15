@@ -261,6 +261,10 @@
     <Compile Include="Migrations\201605121819510_ComixData.Designer.cs">
       <DependentUpon>201605121819510_ComixData.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605150135486_comixDatetime.cs" />
+    <Compile Include="Migrations\201605150135486_comixDatetime.Designer.cs">
+      <DependentUpon>201605150135486_comixDatetime.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CommentViewModel.cs" />
@@ -361,6 +365,7 @@
     <Content Include="Scripts\app\EditDetails.js" />
     <Content Include="Scripts\app\JsonScripts.js" />
     <Content Include="Scripts\app\UserInfo.js" />
+    <Content Include="Scripts\app\ViewComix.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -1145,6 +1150,9 @@
     <Content Include="Views\Admin\_Users.cshtml" />
     <Content Include="Views\Comix\ViewComix.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Templates\SkewView.cshtml" />
+    <Content Include="Views\Templates\TetradView.cshtml" />
+    <Content Include="Views\Templates\BalloonView.cshtml" />
     <None Include="Views\Templates\Triad.cshtml" />
     <None Include="Views\Templates\Tetrad.cshtml" />
     <Content Include="Web.config" />
@@ -1185,6 +1193,7 @@
     <Content Include="Views\Comix\Index.cshtml" />
     <Content Include="Views\Templates\Skew.cshtml" />
     <Content Include="Views\Comix\AddComix.cshtml" />
+    <Content Include="Views\Templates\TriadView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1219,6 +1228,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605041607259_medalsUpdate.resx">
       <DependentUpon>201605041607259_medalsUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605150135486_comixDatetime.resx">
+      <DependentUpon>201605150135486_comixDatetime.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Resource.en.resx" />
     <EmbeddedResource Include="Resources\Resource.resx">
