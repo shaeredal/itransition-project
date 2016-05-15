@@ -7,8 +7,9 @@
 {
     @Html.ActionLink("Edit Details", "EditDetails", "Admin", new { id = @Model.Profile.UserName }, null)
 }
-<h2 id="UserName">@Model.Profile.UserName</h2>
+
 <div class="col-md-3">
+    <h2 id="UserName">@Model.Profile.UserName</h2>
     <div class="panel-default">
         <div class="panel-heading text-center">
             <img class="avatar-cropped-small" src="@Model.Profile.Profile.Photo" width="200" height="200"/>
@@ -55,8 +56,6 @@
                                 }
                             </div>
 
-                            
-
                             <span class="label label-info">@item.Time</span>
                             <div class="pull-right">
                             </div>
@@ -65,5 +64,20 @@
                 </div>
             </div>
         }
+    </div>
+</div>
+
+<div class="col-md-7">
+    <div class="panel-default">
+        <h3 class="panel-heading text-center">Comixes</h3>
+        <div class="panel-body list-group">
+            @foreach (var comix in Model.Comixes)
+            {
+                <h4>
+                    @Html.ActionLink(@comix.Name ?? "*UNNAMED*", "ViewComix", "Comix", new { Id = @comix.Id }, null)
+                </h4>
+                <hr />
+            }
+        </div>
     </div>
 </div>

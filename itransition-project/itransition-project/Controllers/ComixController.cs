@@ -54,6 +54,8 @@ namespace itransition_project.Controllers
 
             Comix c = new Comix() {
                 Author = currentAppUser,
+                CreationTime = DateTime.Now,
+                Name = comix.Name,
                 Pages = new List<Page>()
             };
 
@@ -142,6 +144,8 @@ namespace itransition_project.Controllers
             JsonReturnComixViewModel comixViewModel = new JsonReturnComixViewModel
             {
                 Author = author,
+                CreationTime = comix.CreationTime,
+                Name = comix.Name,
                 Pages = new List<JsonPagesViewModel>()
             };
 

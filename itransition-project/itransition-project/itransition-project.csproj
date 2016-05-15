@@ -259,6 +259,10 @@
     <Compile Include="Migrations\201605121819510_ComixData.Designer.cs">
       <DependentUpon>201605121819510_ComixData.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605150135486_comixDatetime.cs" />
+    <Compile Include="Migrations\201605150135486_comixDatetime.Designer.cs">
+      <DependentUpon>201605150135486_comixDatetime.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CommentViewModel.cs" />
@@ -1220,6 +1224,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605041607259_medalsUpdate.resx">
       <DependentUpon>201605041607259_medalsUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605150135486_comixDatetime.resx">
+      <DependentUpon>201605150135486_comixDatetime.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Resource.en.resx" />
     <EmbeddedResource Include="Resources\Resource.resx">

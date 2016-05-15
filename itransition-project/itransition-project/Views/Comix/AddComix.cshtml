@@ -7,9 +7,19 @@
 
 <div class="container" ng-app="ComixAdd">
     <div id="pages" ng-controller="pagesController">
-        <button ng-click="add()" class="btn btn-default btn-sm">Add Page</button>
-        @*<button ng-click="drgbl()" class="btn btn-default btn-sm">Run</button>*@
-        <button ng-click="save()" class="btn btn-default btn-sm">Save</button>
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="Name">Name</label>
+            <div class="col-md-10">
+                <input class="form-control" data-val="true" data-val-required="Требуется поле Name." id="Name" name="Name" type="text" value="">
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <button ng-click="add()" class="btn btn-default btn-sm">Add Page</button>
+                @*<button ng-click="drgbl()" class="btn btn-default btn-sm">Run</button>*@
+                <button ng-click="save()" class="btn btn-default btn-sm">Save</button>
+            </div>
+        </div>
         <hr/>
         <comix-manager></comix-manager>
     </div>

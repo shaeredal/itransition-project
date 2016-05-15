@@ -138,7 +138,10 @@ function getComix() {
     for(let page of $("#pages").children("comix-manager").toArray()) {
         pages.push(getPage(page));
     }
-    return { "pages": pages };
+    return { 
+        "pages": pages,
+        "name": $("#Name").val()
+    };
 }
 
 function getPage(page) {
