@@ -4,24 +4,32 @@
     ViewBag.Title = "Admin";
 }
 
-<h2 id ="UserName">@Model.User.Profile.User.UserName</h2>
-@using (Html.BeginForm("EditDetails", "Admin", FormMethod.Post))
-{
-    <fieldset>
-        @Html.HiddenFor(m => m.Id)
+<h2 id="UserName">@Model.User.Profile.User.UserName</h2>
+<div class="container">
+    <div class="col-md-8">
+        <div id="userActions">
+            <p>Photo</p>
+            <img id="imgPrime" type="file" id="fileUpload" src="@Model.Photo" />
+        </div>
+    </div>
+    <div class="col-md-4">
         <p>
-            <br/>
-
-            <input type="text" class="form-control" placeholder="Text input" name="about" id="about">
-            @Html.Hidden("id", Model.Id)
+            <input type="text" class="form-control" placeholder="Text input" value="@Model.About" name="about" id="about">
         </p>
-        <p><input type="submit" value="Отправить" /></p>
-    </fieldset>
-}
-
-<div id="userActions">
-    <p>Drag &amp; Drop Image</p>
-    <img id="imgPrime" type="file" id="fileUpload" src="@Model.Photo"/>
+        <p>
+            <select class="form-control" name="Theme" id="Theme">
+                <option>Light</option>
+                <option>Dark</option>
+            </select>
+        </p>
+        <p>
+            <select class="form-control" name="Lang" id="Lang">
+                <option>en</option>
+                <option>ru</option>
+            </select>
+        </p>
+        <p><button onclick="refreshInfo()" type="button" class="btn btn-primary">Refresh</button></p>
+    </div>
 </div>
 
 @section Scripts {
@@ -30,5 +38,37 @@
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/AdminDragDrop")
     @Styles.Render("~/Content/DragAndDrop")
-
 }
+<script>
+    function getUserName() {
+        var id = document.getElementById("UserName").textContent;
+        return id;
+    }
+
+    function getUserAbout() {
+        var about = document.getElementById("about").value;
+        return about;
+    }
+
+    function getUserTheme() {
+        var theme = document.getElementById("Theme").options[document.getElementById("Theme").selectedIndex].value;
+        return theme;
+    }
+
+    function getUserLang() {
+        var theme = document.getElementById("Lang").options[document.getElementById("Lang").selectedIndex].value;
+        return theme;
+    }
+
+    function refreshInfo() {
+
+        jQuery.ajax({
+            type: "POST",
+            url: "/User/RefreshInfo",
+            data: JSON.stringify({ id: getUserName(), about: getUserAbout(), theme: getUserTheme(), lang: getUserLang() }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            succses: window.location.href = "/User/UserInfo/" + getUserName()
+        });
+    }
+</script>

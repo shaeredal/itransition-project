@@ -9,6 +9,7 @@ using AutoMapper;
 using Microsoft.AspNet.Identity;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
+using itransition_project.Lucene;
 
 namespace itransition_project.Controllers
 {
@@ -56,8 +57,28 @@ namespace itransition_project.Controllers
                 Author = currentAppUser,
                 CreationTime = DateTime.Now,
                 Name = comix.Name,
-                Pages = new List<Page>()
+                Pages = new List<Page>(),
+                Tags = new List<Tag>()
             };
+
+            var tags = new List<string>();
+
+            var tagSet = db.Tags.ToList();
+
+            if (comix.Tags.Count != 0)
+                foreach (var tag in comix.Tags)
+                {
+                    var currentTag = tagSet.FirstOrDefault(t => t.Text.Equals(tag.text));
+                    if (currentTag == null)
+                    {
+                        c.Tags.Add(new Tag { Text = tag.text });
+                    }
+                    else
+                    {
+                        c.Tags.Add(currentTag);
+                        currentTag.Comixes.Add(c);
+                    }
+                }
 
             foreach (var page in comix.Pages)
             {
@@ -119,8 +140,8 @@ namespace itransition_project.Controllers
             }
 
             currentAppUser.Profile.Comixes.Add(c);
-
             db.SaveChanges();
+            LuceneEntryModel.AddUpdateLuceneIndex(currentAppUser.Profile.Comixes.Last());
             return Json(Url.Action("UserInfo", "User", new { id = User.Identity.GetUserName() }));
         }
 
@@ -187,6 +208,16 @@ namespace itransition_project.Controllers
                 comixViewModel.Pages.Add(p);
             }
             return comixViewModel;
+        }
+
+        public ActionResult GetTagsForAutocomplete(string id)
+        {
+            var db = new ApplicationDbContext();
+            var lst =
+               (from tag in db.Tags.ToList()
+                where tag.Text.StartsWith(id)
+                select new TagText { text = tag.Text }).ToList();
+            return Json(lst, JsonRequestBehavior.AllowGet);
         }
     }
 }

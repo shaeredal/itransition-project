@@ -1,8 +1,10 @@
 ﻿@using Microsoft.AspNet.Identity
 @model itransition_project.Models.UserInfoViewModel
+
 @{ 
     ViewBag.Title = Model.Profile.UserName;
 }
+
 @if (User.IsInRole("admin"))
 {
     @Html.ActionLink("Edit Details", "EditDetails", "Admin", new { id = @Model.Profile.UserName }, null)
@@ -21,7 +23,7 @@
             </div>
         </div>
     </div>
-    <h3>Medal</h3>
+    <h3>@Resources.Resource.Medal</h3>
     @foreach (var item in Model.Medals)
     {
         <img src="@item.Image" title="@item.Name" width="50" height="50"/>
@@ -30,11 +32,11 @@
     {
         using (Html.BeginForm("UserInfo", "User", FormMethod.Post))
         {
-            @Html.LabelFor(model => model.Comments.First().Text, "Comments")
+            @Html.LabelFor(model => model.Comments.First().Text, @Resources.Resource.Comments)
             <textarea class="form-control" rows="3" type="text" name="text" id="text" placeholder="Text input"></textarea>
             @Html.Hidden("userId", Model.Profile.Profile.User.Id)
             <br />
-            <input type="submit" class="btn btn-default" value="Add" />
+            <input type="submit" class="btn btn-default" value="@Resources.Resource.Add"/>
         }
     }
     <br />

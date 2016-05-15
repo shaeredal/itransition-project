@@ -222,11 +222,13 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ComixController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\CultureAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Lucene\LuceneEntryModel.cs" />
     <Compile Include="Migrations\201604271709309_InitialCreate.cs" />
     <Compile Include="Migrations\201604271709309_InitialCreate.Designer.cs">
       <DependentUpon>201604271709309_InitialCreate.cs</DependentUpon>
@@ -289,6 +291,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\DragAndDrop.css" />
     <Content Include="Content\loading_spinner.gif" />
+    <Content Include="Content\ng-tags-input.bootstrap.css" />
+    <Content Include="Content\ng-tags-input.css" />
     <Content Include="Content\TemplateStyles\skew_style.css" />
     <Content Include="Content\TemplateStyles\triad_style.css" />
     <Content Include="Content\TemplateStyles\tetrad_style.css" />
@@ -1138,6 +1142,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\ng-tags-input.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\app\templates_script.js" />
@@ -1147,6 +1152,7 @@
     <Content Include="Views\Admin\AllUsers.cshtml" />
     <Content Include="Views\Admin\_Users.cshtml" />
     <Content Include="Views\Comix\ViewComix.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Templates\SkewView.cshtml" />
     <Content Include="Views\Templates\TetradView.cshtml" />
     <Content Include="Views\Templates\BalloonView.cshtml" />
@@ -1194,6 +1200,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="LuceneEntryIndex\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using itransition_project.Filters;
+using itransition_project.Lucene;
 using itransition_project.Models;
 
 namespace itransition_project.Controllers
@@ -12,7 +13,7 @@ namespace itransition_project.Controllers
     public class HomeController : Controller
     {
         public ActionResult Index()
-        {      
+        {
             return View();
         }
     }

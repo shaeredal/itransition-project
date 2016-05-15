@@ -59,6 +59,16 @@ namespace itransition_project.Controllers
                     Profile = currentAppUser.Profile
                 });
             }
+            if (dbContext.Comments.Count(x => x.Author.Id == currentUserId) == 4)
+            {
+                currentAppUser.Profile.Medals.Add(new Medal
+                {
+                    Image = "http://res.cloudinary.com/da40pd4iw/image/upload/v1462468044/medal_ban_ipfftk.png",
+                    Name = "5 comments",
+                    Profile = currentAppUser.Profile
+                });
+                dbContext.Medals.Remove(currentAppUser.Profile.Medals.First(x => x.Name == "First Comment"));
+            }
             dbContext.SaveChanges();
             return RedirectToAction("UserInfo", "User");
         }
