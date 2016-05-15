@@ -74,7 +74,7 @@
         <div class="panel-body list-group">
             @foreach (var comix in Model.Comixes)
             {
-                <h4>
+                <h4 class="col-l">
                     @Html.ActionLink(@comix.Name ?? "*UNNAMED*", "ViewComix", "Comix", new { Id = @comix.Id }, null)
                 </h4>
                 <hr />

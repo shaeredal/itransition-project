@@ -168,8 +168,14 @@ namespace itransition_project.Controllers
                 Author = author,
                 CreationTime = comix.CreationTime,
                 Name = comix.Name,
+                Tags = new List<TagText>(),
                 Pages = new List<JsonPagesViewModel>()
             };
+
+            foreach (var tag in comix.Tags)
+            {
+                comixViewModel.Tags.Add(new TagText { text = tag.Text });
+            }
 
             foreach (var page in comix.Pages)
             {
