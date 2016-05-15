@@ -13,6 +13,7 @@ namespace itransition_project.Models
         public DateTime CreationTime { get; set; }
         public string Name { get; set; }
         public List<JsonPagesViewModel> Pages { get; set; }
+        public List<TagText> Tags { get; set; }
     }
 
     [Serializable]
@@ -20,6 +21,7 @@ namespace itransition_project.Models
     {
         public string Name { get; set; }
         public List<JsonPagesViewModel> Pages { get; set; }
+        public List<TagText> Tags { get; set; }
     }
 
     [Serializable]
@@ -48,5 +50,10 @@ namespace itransition_project.Models
         public string Left { get; set; }
         public string Width { get; set; }
         public string Height { get; set; }
+    }
+
+    public class TagText
+    {
+        public string text { get; set; }
     }
 }

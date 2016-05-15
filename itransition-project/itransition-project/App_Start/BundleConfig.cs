@@ -52,6 +52,10 @@ namespace itransition_project
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/ng-tags-input").Include(
+                "~/Scripts/ng-tags-input.js"
+                ));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
@@ -66,6 +70,10 @@ namespace itransition_project
 
             bundles.Add(new StyleBundle("~/Content/balloons").Include(
                       "~/Content/app/balloons_styles.css"));
+
+            bundles.Add(new StyleBundle("~/Content/ng-tags-input").Include(
+                    "~/Content/ng-tags-input.css",
+                    "~/Content/ng-tags-input.bootstrap.css"));
         }
     }
 }

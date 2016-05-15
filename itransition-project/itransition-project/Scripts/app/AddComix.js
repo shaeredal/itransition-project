@@ -1,4 +1,4 @@
-﻿var app = angular.module('ComixAdd', []);
+﻿var app = angular.module('ComixAdd', ['ngTagsInput']);
 app.controller('switchTemplateController', function ($scope) {
     $scope.items = ['skew', 'triad', 'tetrad'];
     //$scope.$watch('selection', function () { make_it_draggable(); })
@@ -99,13 +99,18 @@ app.controller("pagesController", function ($scope, $http) {
                 $scope.drgbl();
             });
     });
+    $scope.tags = [];
+    $scope.loadTags = function (query) {
+        return $http.get("/Comix/GetTagsForAutocomplete/" + query);
+    };
     $scope.save = function () {
-        var comix = $http.post('/Comix/ReceiveComix', getComix());
+        var comix = $http.post('/Comix/ReceiveComix', getComix($scope));
         comix.success(function(data, status, headers, config) {
             window.location.href = data;
         });
         comix.error(function(data, status, headers, config) {
-            alert( "failure message: " + JSON.stringify({data: data}));
+            //alert( "failure message: " + JSON.stringify({data: data}));
+            alert("Unable to upload comix");
         });		
     }
     }).directive("comixManager", function ($compile) {
@@ -121,8 +126,6 @@ app.controller("pagesController", function ($scope, $http) {
     };
     });
 
-
-
 //app.directive('drgbl', function($timeout) {
 //    return {
 //        link: function(scope, element, attr) {
@@ -133,13 +136,14 @@ app.controller("pagesController", function ($scope, $http) {
 //    }
 //});
 
-function getComix() {
+function getComix(scope) {
     var pages = [];
     for(let page of $("#pages").children("comix-manager").toArray()) {
         pages.push(getPage(page));
     }
     return { 
         "pages": pages,
+        "tags" : scope.tags, 
         "name": $("#Name").val()
     };
 }
@@ -168,7 +172,6 @@ function getImage(image) {
     for(let balloon of $(image).find(".talkbubble").toArray()) {
         balloons.push(getBalloon(balloon));
     }
-
 
     return {
         "backgroundimage": bg,
