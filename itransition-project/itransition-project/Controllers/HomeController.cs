@@ -14,8 +14,9 @@ namespace itransition_project.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            var db = new ApplicationDbContext();
+            List<Comix> model = db.Comixes.OrderByDescending(c => c.CreationTime).Take(5).ToList();
+            return View(model);
         }
     }
-
 }

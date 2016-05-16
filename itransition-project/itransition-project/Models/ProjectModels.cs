@@ -86,7 +86,6 @@ namespace itransition_project.Models
     {
         public int Id { get; set; }
         public string Text { get; set; }
-        public ICollection<Comix> Comixes { get; set; }
     }
 
     public class Template

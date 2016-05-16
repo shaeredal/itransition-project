@@ -12,7 +12,6 @@
     @Scripts.Render("~/bundles/modernizr")
     @if (Request.IsAuthenticated)
     {
-
         ApplicationUser user = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(HttpContext.Current.User.Identity.GetUserId());
         if (user.Theme == "Light")
         {

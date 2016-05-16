@@ -135,6 +135,9 @@
   <data name="Hello" xml:space="preserve">
     <value>Привет</value>
   </data>
+  <data name="Latest" xml:space="preserve">
+    <value>Последнее</value>
+  </data>
   <data name="LogOff" xml:space="preserve">
     <value>Выйти</value>
   </data>
@@ -146,6 +149,9 @@
   </data>
   <data name="Profile" xml:space="preserve">
     <value>Профиль</value>
+  </data>
+  <data name="Rating" xml:space="preserve">
+    <value>Рейтинг</value>
   </data>
   <data name="Refresh" xml:space="preserve">
     <value>Обновить</value>

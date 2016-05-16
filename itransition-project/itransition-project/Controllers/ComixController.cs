@@ -71,12 +71,11 @@ namespace itransition_project.Controllers
                     var currentTag = tagSet.FirstOrDefault(t => t.Text.Equals(tag.text));
                     if (currentTag == null)
                     {
-                        c.Tags.Add(new Tag { Text = tag.text });
+                        c.Tags.Add(new Tag { Text = tag.text});
                     }
                     else
                     {
                         c.Tags.Add(currentTag);
-                        currentTag.Comixes.Add(c);
                     }
                 }
 
@@ -168,8 +167,14 @@ namespace itransition_project.Controllers
                 Author = author,
                 CreationTime = comix.CreationTime,
                 Name = comix.Name,
+                Tags = new List<TagText>(),
                 Pages = new List<JsonPagesViewModel>()
             };
+
+            foreach (var tag in comix.Tags)
+            {
+                comixViewModel.Tags.Add(new TagText { text = tag.Text });
+            }
 
             foreach (var page in comix.Pages)
             {

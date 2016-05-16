@@ -124,7 +124,7 @@
     <value>Comments</value>
   </data>
   <data name="Create" xml:space="preserve">
-    <value>Создать</value>
+    <value>Create</value>
   </data>
   <data name="CreateComix" xml:space="preserve">
     <value>Create Comix</value>
@@ -134,6 +134,9 @@
   </data>
   <data name="Hello" xml:space="preserve">
     <value>Hello</value>
+  </data>
+  <data name="Latest" xml:space="preserve">
+    <value>Latest</value>
   </data>
   <data name="LogOff" xml:space="preserve">
     <value>Log off</value>
@@ -146,6 +149,9 @@
   </data>
   <data name="Profile" xml:space="preserve">
     <value>Profile</value>
+  </data>
+  <data name="Rating" xml:space="preserve">
+    <value>Rating</value>
   </data>
   <data name="Refresh" xml:space="preserve">
     <value>Refresh</value>

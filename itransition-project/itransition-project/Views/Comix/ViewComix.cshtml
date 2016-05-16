@@ -4,9 +4,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@Model.Name</h2>
-<h6>@Html.ActionLink(@Model.Author.UserName, "UserInfo", "User", new { id = Model.Author.UserName }, null), @Model.CreationTime.ToString()</h6>
-<div ng-app="Like">
+<h2 class="row">@Model.Name</h2>
+<h6 class="row">@Html.ActionLink(@Model.Author.UserName, "UserInfo", "User", new { id = Model.Author.UserName }, null), @Model.CreationTime.ToString()</h6>
+<div class="row">
+    @foreach (var tag in Model.Tags)
+    {
+        <a class="label label-primary">@tag.text</a>
+    }
+</div>
+<br/>
+<div class="row" ng-app="Like">
     <div ng-controller="LikeController" ng-init="setId(@Model.Id)">
         <div style="max-width: 150px" class="input-group">
             <span class="input-group-btn">
@@ -25,25 +32,25 @@
         </div>
     </div>
 </div>
-        <div class="container">
-            <div id="pages">
-                @foreach (var page in Model.Pages)
-                {
-                    switch (page.Template)
-                    {
-                        case "skew":
-                            @Html.Partial("~/Views/Templates/SkewView.cshtml", page)
-                            break;
-                        case "triad":
-                            @Html.Partial("~/Views/Templates/TriadView.cshtml", page)
-                            break;
-                        case "tetrad":
-                            @Html.Partial("~/Views/Templates/TetradView.cshtml", page)
-                            break;
-                    }
-                }
-            </div>
-        </div>
-        @section scripts{
-                        @Scripts.Render("~/bundles/LikeAndDislike")
+<div class="container">
+    <div id="pages">
+        @foreach (var page in Model.Pages)
+        {
+            switch (page.Template)
+            {
+                case "skew":
+                    @Html.Partial("~/Views/Templates/SkewView.cshtml", page)
+                    break;
+                case "triad":
+                    @Html.Partial("~/Views/Templates/TriadView.cshtml", page)
+                    break;
+                case "tetrad":
+                    @Html.Partial("~/Views/Templates/TetradView.cshtml", page)
+                    break;
             }
+        }
+    </div>
+</div>
+@section scripts{
+                @Scripts.Render("~/bundles/LikeAndDislike")
+    }
