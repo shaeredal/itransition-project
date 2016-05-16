@@ -12,7 +12,7 @@
         {
             <div class="row">
                 <div class="col-md-12">
-                    @Html.ActionLink(@en.Name + @en.Author.UserName?? "*UNNAMED*", "ViewComix", "Comix", new { Id = @en.Id }, null)
+                    @Html.ActionLink(@en.Name ?? "*UNNAMED*", "ViewComix", "Comix", new { Id = @en.Id }, null)
                 </div>
             </div>
             <hr>
