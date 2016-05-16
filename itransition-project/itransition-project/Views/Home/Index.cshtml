@@ -15,7 +15,6 @@
                 <div class="row">
                     @foreach (var tag in comix.Tags)
                     {
-                        <a class="label label-primary">@tag.Text</a>
                         @Html.ActionLink(tag.Text, "SearchByTag", "Search", new { id = tag.Text }, new {@class = "label label-primary" })
                     }
                 </div>
@@ -33,19 +32,19 @@
         <div class="dataBoxContent">
         </div>
         <div class="hline"></div>
-        @*<div ng-app="tagCloud" class="row">
+        <div ng-app="tagCloud" class="row">
             <div id="keyword_cloud" ng-controller="tagCloudCtrl">
                 <div class="dataBoxContent">
                     <span ng-cloak ng-repeat="word in words">
-                        <a href="../../view/bytag/{{word.TagName}}" class="cloud_{{ word.Weight }}">{{ word.TagName }}</a>
-                    </span>
+        <a href="../../Search/SearchByTag/{{word.TagName}}" class="cloud_{{ word.Weight }}">{{ word.TagName }}</a> 
+</span>
                 </div>
-            </div>  
-        </div>*@
+            </div>
+        </div>
     </div>
 </div>
 
-@*@section scripts{
+@section scripts{
     @Scripts.Render("~/bundles/tagCloud")
-}*@
+}
 

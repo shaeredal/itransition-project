@@ -57,10 +57,7 @@ namespace itransition_project.Lucene
                 {
                     foreach (var balloons in frames.Balloons)
                     {
-                        foreach (var text in balloons.Text)
-                        {
-                            Balloon += text + " ";
-                        }
+                            Balloon += balloons.Text + " ";
                     }
                 }
             }

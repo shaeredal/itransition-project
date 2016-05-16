@@ -43,7 +43,7 @@
     <div ng-app="">
         @foreach (var item in Model.Comments)
         {
-            <div class="row">
+            <div class="row comment-list-container">
                 <div class="col-xs-4">
                     <a href="../../User/UserInfo/@item.Author.UserName"><img ng-src="@item.Author.Profile.Photo" class="img-circle img-responsive" width="150" height="150"></a><span>@item.Author.UserName</span>
                 </div>
@@ -54,7 +54,7 @@
                             <div class="pull-right">
                                 @if (item.Author.UserName == User.Identity.GetUserName() || User.IsInRole("admin"))
                                 {
-                                    <button type="button" class="btn btn-xs btn-default" onclick="DelComment(@item.Id)"><span class="glyphicon glyphicon-remove"></span></button>
+                                    <button type="button" class="btn btn-xs btn-default" onclick="DelComment(@item.Id)" data-id="@item.Id"><span class="glyphicon glyphicon-remove"></span></button>
                                 }
                             </div>
 
@@ -75,22 +75,25 @@
         <div class="panel-body list-group">
             @foreach (var comix in Model.Comixes)
             {
-                <h4 class="row">
-                    @Html.ActionLink(@comix.Name ?? "*UNNAMED*", "ViewComix", "Comix", new { Id = @comix.Id }, null)
-                    @if (comix.Author.UserName == User.Identity.GetUserName() || User.IsInRole("admin"))
-                    {
-                        <button type="button" class="btn btn-xs btn-default" onclick="DelComix(@comix.Id)"><span class="glyphicon glyphicon-remove"></span></button>
-                    }
-                </h4>
-                <div class="row">
-                    @foreach(var tag in comix.Tags)
-                    {
-                        <a class= "label label-primary">@tag.Text</a>
-                    }
+                <div class="comix-list-container">
+                    <h4 class="row">
+                        @Html.ActionLink(@comix.Name ?? "*UNNAMED*", "ViewComix", "Comix", new { Id = @comix.Id }, null)
+                        @if (comix.Author.UserName == User.Identity.GetUserName() || User.IsInRole("admin"))
+                        {
+                            <button type="button" class="btn btn-xs btn-default" onclick="DelComix(@comix.Id)" data-id="@comix.Id"><span class="glyphicon glyphicon-remove"></span></button>
+                        }
+                    </h4>
+                    <div class="row">
+                        @foreach (var tag in comix.Tags)
+                        {
+                            @*<a class="label label-primary">@tag.Text</a>*@
+                            @Html.ActionLink(tag.Text, "SearchByTag", "Search", new { id = tag.Text }, new { @class = "label label-primary" })
+                        }
+                    </div>
+                    <h6 class="row">@Html.ActionLink(comix.Author.UserName, "UserInfo", "User", new { id = comix.Author.UserName }, null), @comix.CreationTime.ToString()</h6>
+                    <h6 class="row">@Resources.Resource.Rating : @comix.RatingValue</h6>
+                    <hr />
                 </div>
-                <h6 class="row">@Html.ActionLink(comix.Author.UserName, "UserInfo", "User", new { id = comix.Author.UserName }, null), @comix.CreationTime.ToString()</h6>
-                <h6 class="row">@Resources.Resource.Rating : @comix.RatingValue</h6>
-                <hr />
             }
         </div>
     </div>

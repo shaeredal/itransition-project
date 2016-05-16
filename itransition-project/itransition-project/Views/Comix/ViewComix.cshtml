@@ -10,6 +10,7 @@
     @foreach (var tag in Model.Tags)
     {
         <a class="label label-primary">@tag.text</a>
+        @Html.ActionLink(tag.text, "SearchByTag", "Search", new { id = tag.text }, new { @class = "label label-primary" })
     }
 </div>
 <br/>

@@ -278,8 +278,8 @@ namespace itransition_project.Controllers
             var c = db.Comixes.First(x => x.Id == comix.Id);
             var edb = db.Comixes.First(x => x.Id == Id);
             int rating = edb.Ratings.Sum(userRate => userRate.Condition ? 1 : -1);
-            c.RatingValue = rating;
             c = comix;
+            c.RatingValue = rating;
             db.SaveChanges();
             return null;
         }

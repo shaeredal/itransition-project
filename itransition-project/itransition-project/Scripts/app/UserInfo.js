@@ -6,9 +6,12 @@
             data: JSON.stringify({ data: id }),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            succses: window.location.href = "/User/UserInfo/" + getUserName()
-
+            success: commentDeleteCallback(id)
         });
+}
+
+function commentDeleteCallback(id) {
+    $("button[data-id='" + id + "']").closest(".comment-list-container").remove();
 }
 
 function DelComix(id) {
@@ -19,9 +22,13 @@ function DelComix(id) {
         data: JSON.stringify({ data: id }),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        succses: window.location.href = "/User/UserInfo/" + getUserName()
+        success: comixDeleteCallback(id)
 
     });
+}
+
+function comixDeleteCallback(id) {
+    $("button[data-id='" + id + "']").closest(".comix-list-container").remove();
 }
 
 function getUserName() {

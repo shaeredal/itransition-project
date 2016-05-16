@@ -1,6 +1,5 @@
-﻿(function () {
-    var mod = angular.module("tagCloud");
-    mod.controller("tagCloudCtrl", [
+﻿var app = angular.module('tagCloud', []);
+    app.controller("tagCloudCtrl", [
         "$scope", "$http", function ($scope, $http) {
             $scope.words = [];
             $scope.loadtags = function () {
@@ -12,7 +11,7 @@
                     var fontMax, fontMin, i, lol, max, min, size, sizes, tag, _results;
                     sizes = [];
                     response.data.forEach(function (item) {
-                        return sizes.push(item.Usage);
+                        return sizes.push(item.Uses);
                     });
                     max = Math.max.apply(Math, sizes);
                     min = Math.min.apply(Math, sizes);
@@ -21,11 +20,12 @@
                     _results = [];
                     for (i in response.data) {
                         tag = response.data[i];
-                        size = (tag.Usage === min ? fontMin : (tag.Usage / max) * (fontMax - fontMin) + fontMin);
+                        size = (tag.Uses === min ? fontMin : (tag.Uses / max) * (fontMax - fontMin) + fontMin);
                         lol = {
-                            TagName: tag.Text,
+                            TagName: tag.TagName,
                             Weight: Math.round(size)
                         };
+                        console.log(lol);
                         _results.push($scope.words.push(lol));
                     }
                     return _results;
@@ -34,4 +34,3 @@
             return $scope.loadtags();
         }
     ]);
-})();
