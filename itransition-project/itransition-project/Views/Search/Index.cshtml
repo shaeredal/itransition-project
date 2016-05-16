@@ -3,22 +3,16 @@
 <div class="container">
     <!-- Page Heading -->
     <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">
-                 @Model.Count() постов найдено
-            </h1>
-        </div>
+        <h1 class="page-header">
+            @Model.Count() постов найдено
+        </h1>
     </div>
-    <!-- /.row -->
-    <!-- Project One -->
+
     @{ foreach (Comix en in @Model)
         {
             <div class="row">
-                <div class="col-md-7">
-                </div>
-                <div class="col-md-5">
-                    <h3>@en.Name</h3>
-                    <h4 class="label label-info">@en.Author</h4>
+                <div class="col-md-12">
+                    @Html.ActionLink(@en.Name + @en.Author?.UserName, "ViewComix", "Comix", new { Id = @en.Id }, null)
                 </div>
             </div>
             <hr>

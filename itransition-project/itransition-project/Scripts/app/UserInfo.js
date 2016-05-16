@@ -10,6 +10,22 @@
 
         });
 }
+
+function DelComix(id) {
+
+    jQuery.ajax({
+        type: "POST",
+        url: "/User/DelComix",
+        data: JSON.stringify({ data: id }),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        succses: function(data) {
+            window.location.href = data;
+        }
+
+    });
+}
+
 function getUserName() {
     var id = document.getElementById("UserName").textContent;
     return id;

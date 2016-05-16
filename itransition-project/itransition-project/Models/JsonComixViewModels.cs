@@ -56,4 +56,10 @@ namespace itransition_project.Models
     {
         public string text { get; set; }
     }
+
+    public class TagCloud
+    {
+        public string Text { get; set; }
+        public int Usage { get; set; }
+    }
 }

@@ -56,6 +56,10 @@ namespace itransition_project
                 "~/Scripts/ng-tags-input.js"
                 ));
 
+            bundles.Add(new ScriptBundle("~/bundles/tagCloud").Include(
+                "~/Scripts/app/TagCloud.js"
+                ));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));

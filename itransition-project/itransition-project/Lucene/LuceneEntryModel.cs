@@ -50,6 +50,22 @@ namespace itransition_project.Lucene
             }
             doc.Add(new Field("Tags", tags, Field.Store.YES, Field.Index.ANALYZED));
 
+            string Balloon = "";
+            foreach (var pages in entry.Pages)
+            {
+                foreach (var frames in pages.Frames)
+                {
+                    foreach (var balloons in frames.Balloons)
+                    {
+                        foreach (var text in balloons.Text)
+                        {
+                            Balloon += text + " ";
+                        }
+                    }
+                }
+            }
+            doc.Add(new Field("Balloons", Balloon, Field.Store.YES, Field.Index.ANALYZED));
+
             // add entry to index
             writer.AddDocument(doc);
         }
@@ -171,7 +187,7 @@ namespace itransition_project.Lucene
                 else
                 {
                     var parser = new MultiFieldQueryParser
-                        (Version.LUCENE_30, new[] { "Id", "Name", "Tags", "Content", "Description", "Comments", "Tags" }, analyzer);
+                        (Version.LUCENE_30, new[] { "Id", "Name", "Tags", "Balloons", "Description", "Comments", "Tags" }, analyzer);
                     var query = parseQuery(searchQuery, parser);
                     var hits = searcher.Search
                     (query, null, hits_limit, Sort.RELEVANCE).ScoreDocs;

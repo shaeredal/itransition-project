@@ -71,12 +71,11 @@ namespace itransition_project.Controllers
                     var currentTag = tagSet.FirstOrDefault(t => t.Text.Equals(tag.text));
                     if (currentTag == null)
                     {
-                        c.Tags.Add(new Tag { Text = tag.text });
+                        c.Tags.Add(new Tag { Text = tag.text});
                     }
                     else
                     {
                         c.Tags.Add(currentTag);
-                        currentTag.Comixes.Add(c);
                     }
                 }
 
@@ -277,6 +276,9 @@ namespace itransition_project.Controllers
             }
             comix.Ratings.Add(new Rating {Condition = isPositive, User = user});
             var c = db.Comixes.First(x => x.Id == comix.Id);
+            var edb = db.Comixes.First(x => x.Id == Id);
+            int rating = edb.Ratings.Sum(userRate => userRate.Condition ? 1 : -1);
+            c.RatingValue = rating;
             c = comix;
             db.SaveChanges();
             return null;

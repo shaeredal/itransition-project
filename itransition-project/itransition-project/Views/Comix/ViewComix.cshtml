@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@Model.Name</h2>
+<h2 class="row">@Model.Name</h2>
 <h6 class="row">@Html.ActionLink(@Model.Author.UserName, "UserInfo", "User", new { id = Model.Author.UserName }, null), @Model.CreationTime.ToString()</h6>
 <div class="row">
     @foreach (var tag in Model.Tags)

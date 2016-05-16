@@ -1,44 +1,51 @@
-﻿@{
+﻿@model List<itransition_project.Models.Comix>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Home Page";
 }
 <br/>
 <div class="container">
     <div class="col-md-8">
-        <div class="panel panel-default">
-            <div class="panel-body">
+        <h2 class="row">@Resources.Resource.Latest</h2>
+        @foreach (var comix in Model)
+            {
+            <h4 class="row">
+                @Html.ActionLink(@comix.Name ?? "*UNNAMED*", "ViewComix", "Comix", new { Id = @comix.Id }, null)
+            </h4>
                 <div class="row">
-                    <div class="col-md-12">
-                        <h4>Название</h4>
-                        <hr/>
-                    </div>
+                    @foreach (var tag in comix.Tags)
+                    {
+                        <a class="label label-primary">@tag.Text</a>
+                    }
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <h4>Превьюха</h4>
-                        <img src="http://res.cloudinary.com/da40pd4iw/image/upload/v1463066344/t8emfstcy8jhnf1e6lsh.jpg" class="img-responsive"/>
-                        <hr/>
-                    </div>
-                </div>
-
-            </div>
-            <div class="panel-footer">
-                <i class="glyphicon glyphicon-user"></i> Автор |
-                <i class="glyphicon glyphicon-time"></i> Время|
-                <i class="glyphicon glyphicon-star"></i> Рейтинг
-            </div>
-        </div>
+                <h6 class="row">@Html.ActionLink(comix.Author.UserName, "UserInfo", "User", new { id = comix.Author.UserName }, null), @comix.CreationTime.ToString()</h6>
+                <h6 class="row">@Resources.Resource.Rating : @comix.RatingValue</h6>
+                <hr />
+        }
     </div>
     <div class="col-md-4">
         @using (@Html.BeginForm("Index", "Search", FormMethod.Get))
         {
-
-            @Html.Editor("id", new {htmlAttributes = new {@class = "form-control"}})
-            ;
+            @Html.Editor("id", new {htmlAttributes = new {@class = "form-control"}});
         }
         <div class="hline"></div>
         <div class="dataBoxContent">
             <a href="Google.com" class="label label-info">Google.com</a>
         </div>
+        <div class="hline"></div>
+        @*<div ng-app="tagCloud" class="row">
+            <div id="keyword_cloud" ng-controller="tagCloudCtrl">
+                <div class="dataBoxContent">
+                    <span ng-cloak ng-repeat="word in words">
+                        <a href="../../view/bytag/{{word.TagName}}" class="cloud_{{ word.Weight }}">{{ word.TagName }}</a>
+                    </span>
+                </div>
+            </div>  
+        </div>*@
     </div>
 </div>
+
+@*@section scripts{
+    @Scripts.Render("~/bundles/tagCloud")
+}*@
 

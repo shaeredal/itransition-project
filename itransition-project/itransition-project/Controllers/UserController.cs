@@ -119,6 +119,41 @@ namespace itransition_project.Controllers
         }
 
         [HttpPost]
+        public ActionResult DelComix(int data)
+        {
+            var dbContext = new ApplicationDbContext();
+            Comix comix = dbContext.Comixes.First(x => x.Id == data);
+
+            foreach(var tag in comix.Tags.ToList())
+            {
+                comix.Tags.Remove(tag);
+            }
+
+            foreach(var rating in comix.Ratings.ToList())
+            {
+                dbContext.Ratings.Remove(rating);
+            }
+            
+            foreach(var page in comix.Pages.ToList())
+            {
+                foreach(var frame in page.Frames.ToList())
+                {
+                    foreach(var balloon in frame.Balloons.ToList())
+                    {
+                        frame.Balloons.Remove(balloon);
+                    }
+                    page.Frames.Remove(frame);
+                }
+                comix.Pages.Remove(page);
+            }
+
+            comix.Author.Profile.Comixes.Remove(comix);
+            dbContext.Comixes.Remove(comix);
+            dbContext.SaveChanges();
+            return Json(Url.Action("UserInfo", "User", new { id = User.Identity.GetUserName() }));
+        }
+
+        [HttpPost]
         public JsonResult UpdateImage(string data)
         {
             var dbContext = new ApplicationDbContext();
