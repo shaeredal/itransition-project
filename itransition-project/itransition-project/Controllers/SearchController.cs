@@ -17,5 +17,11 @@ namespace itransition_project.Controllers
             List<Comix> findComixes = LuceneEntryModel.Search(id, null).ToList();
             return View(findComixes);
         }
+
+        public ActionResult SearchByTag(string id)
+        {
+            List<Comix> findComixes = LuceneEntryModel.SearchByTag(id, null).ToList();
+            return View(findComixes);
+        }
     }
 }

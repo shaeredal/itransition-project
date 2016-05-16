@@ -16,6 +16,7 @@
                     @foreach (var tag in comix.Tags)
                     {
                         <a class="label label-primary">@tag.Text</a>
+                        @Html.ActionLink(tag.Text, "SearchByTag", "Search", new { id = tag.Text }, new {@class = "label label-primary" })
                     }
                 </div>
                 <h6 class="row">@Html.ActionLink(comix.Author.UserName, "UserInfo", "User", new { id = comix.Author.UserName }, null), @comix.CreationTime.ToString()</h6>
@@ -30,7 +31,6 @@
         }
         <div class="hline"></div>
         <div class="dataBoxContent">
-            <a href="Google.com" class="label label-info">Google.com</a>
         </div>
         <div class="hline"></div>
         @*<div ng-app="tagCloud" class="row">

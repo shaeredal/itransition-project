@@ -19,9 +19,7 @@ function DelComix(id) {
         data: JSON.stringify({ data: id }),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        succses: function(data) {
-            window.location.href = data;
-        }
+        succses: window.location.href = "/User/UserInfo/" + getUserName()
 
     });
 }

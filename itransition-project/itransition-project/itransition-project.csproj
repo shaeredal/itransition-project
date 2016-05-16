@@ -1166,6 +1166,7 @@
     <Content Include="Views\Templates\SkewView.cshtml" />
     <Content Include="Views\Templates\TetradView.cshtml" />
     <Content Include="Views\Templates\BalloonView.cshtml" />
+    <Content Include="Views\Search\SearchByTag.cshtml" />
     <None Include="Views\Templates\Triad.cshtml" />
     <None Include="Views\Templates\Tetrad.cshtml" />
     <Content Include="Web.config" />

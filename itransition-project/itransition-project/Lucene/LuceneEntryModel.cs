@@ -209,5 +209,55 @@ namespace itransition_project.Lucene
             return _search(input, fieldName);
         }
 
+        private static IEnumerable<Comix> _searchByTag(string searchQuery, string searchField = "")
+        {
+            // validation
+            if (string.IsNullOrEmpty(searchQuery.Replace("*", "").Replace("?", ""))) return new List<Comix>();
+
+            // set up lucene searcher
+            using (var searcher = new IndexSearcher(_directory, false))
+            {
+                var hits_limit = 1000;
+                var analyzer = new StandardAnalyzer(Version.LUCENE_30);
+
+                // search by single field
+                if (!string.IsNullOrEmpty(searchField))
+                {
+                    var parser = new QueryParser(Version.LUCENE_30, searchField, analyzer);
+                    var query = parseQuery(searchQuery, parser);
+                    var hits = searcher.Search(query, hits_limit).ScoreDocs;
+                    var results = MapLuceneToDataList(hits, searcher);
+                    analyzer.Close();
+                    searcher.Dispose();
+                    return results;
+                }
+                // search by multiple fields (ordered by RELEVANCE)
+                else
+                {
+                    var parser = new MultiFieldQueryParser
+                        (Version.LUCENE_30, new[] {"Tags"}, analyzer);
+                    var query = parseQuery(searchQuery, parser);
+                    var hits = searcher.Search
+                    (query, null, hits_limit, Sort.RELEVANCE).ScoreDocs;
+                    var results = MapLuceneToDataList(hits, searcher);
+                    analyzer.Close();
+                    searcher.Dispose();
+                    return results;
+                }
+            }
+        }
+
+        public static IEnumerable<Comix> SearchByTag(string input, string fieldName = "")
+        {
+            if (string.IsNullOrEmpty(input)) return new List<Comix>();
+
+            var terms = input.Trim().Replace("-", " ").Split(' ')
+                .Where(x => !string.IsNullOrEmpty(x)).Select(x => x.Trim() + "*");
+            input = string.Join(" ", terms);
+
+            return _searchByTag(input, fieldName);
+        }
+
+
     }
 }
